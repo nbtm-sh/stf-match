@@ -18,7 +18,7 @@ app.get('/matches', (req, res) => {
 
 app.get('/all', (req, res) => {
     var query = 'SELECT * FROM `matches`;';
-    sql_db.query(query, send_matches, res);
+    sql_db.Sq.query(query, send_matches, res);
 })
 
 var server = app.listen(8080);
