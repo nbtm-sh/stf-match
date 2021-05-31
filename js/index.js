@@ -33,7 +33,7 @@ function send_matches(results, client_res) {
             id: results[0][i].id,
             uPlayer1: results[0][i].uPlayer1,
             uPlayer2: results[0][i].uPlayer2,
-            uPlayer1Fighter: results[0][i].uPlayer2Fighter,
+            uPlayer1Fighter: results[0][i].uPlayer1Fighter,
             uPlayer2Fighter: results[0][i].uPlayer2Fighter,
             tRound: results[0][i].tRound,
             tResult: results[0][i].tResult
