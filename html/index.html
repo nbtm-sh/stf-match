@@ -10,12 +10,19 @@
         <h1>STF Matchmaking Demo Site</h1>
         <p>I made this in like an hour okay it'll be better later</p>
         <div class="matchmakingform">
-            <form action="/" method=POST>
+            <form action="/index.html" method=GET>
                 <h3>Search matchmaking results</h3>
                 <input name="u1" type="text" placeholder="Player 1"><br>
                 <input name="u2" type="text" placeholder="Player 2"><br>
                 <input type="submit" value="Search">
             </form>
         </div>
+        <div class="results">
+            
+        </div>
+        <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            console.log(urlParams.get("u1"));
+        </script>
     </body>
 </html>
