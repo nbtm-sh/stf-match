@@ -41,6 +41,7 @@ app.get('/matches', (req, res) => {
 
 app.get('/all', (req, res, q=query) => {
     var query = 'SELECT * FROM `matches`;';
+    console.log("GET /all");
     q(query, send_matches, res);
 })
 
