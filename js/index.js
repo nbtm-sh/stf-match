@@ -1,5 +1,23 @@
 var express = require("express");
-var sql_db = require("./mysql_api.js")
+var creds = require("./mysql-creds.json");
+var mysql = require("mysql");
+
+var mysql_connection = mysql.createConnection({
+    "host": "localhost",
+    "user": creds.username,
+    "password": creds.password,
+    "database": "stf"
+});
+
+function query(sql_query, callback, ext_args) {
+    mysql.query(sql_query, (err, result, fields, cb=callback, ext=ext_args) => {
+        if (!err) {
+            cb(result, ext_args);
+        }
+    })
+}
+
+mysql_connection.connect();
 
 var app = express();
 
@@ -16,9 +34,9 @@ app.get('/matches', (req, res) => {
     sql_db.query(query, send_matches, res);
 });
 
-app.get('/all', (req, res) => {
+app.get('/all', (req, res, q=query) => {
     var query = 'SELECT * FROM `matches`;';
-    sql_db.Sq.query(query, send_matches, res);
+    q(query, send_matches, res);
 })
 
 var server = app.listen(8080);
