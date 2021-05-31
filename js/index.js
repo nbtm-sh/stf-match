@@ -30,13 +30,13 @@ function send_matches(results, client_res) {
 
     for (var i = 0; i < results[0].length; i += 1) {
         res_json.push({
-            id: results[0].id,
-            uPlayer1: results[0].uPlayer1,
-            uPlayer2: results[0].uPlayer2,
-            uPlayer1Fighter: results[0].uPlayer2Fighter,
-            uPlayer2Fighter: results[0].uPlayer2Fighter,
-            tRound: results[0].tRound,
-            tResult: results[0].tResult
+            id: results[0][i].id,
+            uPlayer1: results[0][i].uPlayer1,
+            uPlayer2: results[0][i].uPlayer2,
+            uPlayer1Fighter: results[0][i].uPlayer2Fighter,
+            uPlayer2Fighter: results[0][i].uPlayer2Fighter,
+            tRound: results[0][i].tRound,
+            tResult: results[0][i].tResult
         });
     }
 
