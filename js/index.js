@@ -26,6 +26,7 @@ function send_matches(results, client_res) {
     console.log("Reached send matches function");
 
     console.log(results[0]);
+    console.log(results[0].length);
 
     for (var i = 0; i < results[0].length; i += 1) {
         res_json.push({
