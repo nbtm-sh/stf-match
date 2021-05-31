@@ -8,8 +8,6 @@ var mysql_connection = mysql.createConnection({
     "database": "stf"
 });
 
-mysql_connection.connect();
-
 function query(sql_query, callback, ext_args) {
     mysql.query(sql_query, (err, result, fields, cb=callback, ext=ext_args) => {
         if (!err) {
@@ -17,3 +15,5 @@ function query(sql_query, callback, ext_args) {
         }
     })
 }
+
+mysql_connection.connect();
