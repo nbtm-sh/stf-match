@@ -21,6 +21,22 @@ mysql_connection.connect();
 
 var app = express();
 
+global_temp = []
+
+function send_players(client_res) {
+    var res_json = [];
+
+    for (var i = 0; i < global_temp.length; i += 1) {
+        res_json.push({
+            id: global_temp[i].id,
+            uName: gloabl_temp[i].uName,
+            uCountry: gloabl_temp[i].uCountry
+        });
+    }
+
+    client_res.json(res_json);
+}
+
 function send_matches(results, client_res) {
     var res_json = [];
     console.log("Reached send matches function");
@@ -54,9 +70,16 @@ app.get('/matches', (req, res) => {
 });
 
 app.get('/player', (req, res, msql=mysql_connection) => {
-    msql.query(`SELECT * FROM \`players\` WHERE id=${res.query.p};`, (err, result, fields, cb=send_matches, ext=res) => {
-
-    });
+    var ids = req.query.p.split(",");
+    global_temp = [];
+    for (var i = 0; i < ids.length; i += 1) {
+        msql.query(`SELECT * FROM \`players\` WHERE id=${ids[i]};`, (err, result, fields, cb=send_players, ext=res, send_results=(i==ids.length-1)) => {
+            global_temp.push(results);
+            if (send_results) {
+                cb(ext);
+            }
+        });
+    }
 })
 
 app.get('/all', (req, res, query_callback=query_db, msql=mysql_connection) => {
