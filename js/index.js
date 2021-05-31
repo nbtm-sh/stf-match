@@ -12,7 +12,7 @@ var mysql_connection = mysql.createConnection({
 function query(sql_query, callback, ext_args) {
     mysql.query(sql_query, (err, result, fields, cb=callback, ext=ext_args) => {
         if (!err) {
-            cb(result, ext_args);
+            cb((result, feilds), ext_args);
         }
     })
 }
