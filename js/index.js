@@ -14,7 +14,7 @@ function query_db(sql_query, callback, ext_args) {
     mysql.query(sql_query, (err, result, fields, cb=callback, ext=ext_args) => {
         console.log("Complete. Callback!");
         cb((result, fields), ext_args);
-    })
+    });
 }
 
 mysql_connection.connect();
@@ -39,10 +39,12 @@ app.get('/matches', (req, res) => {
     sql_db.query(query, send_matches, res);
 });
 
-app.get('/all', (req, res, q=query_db) => {
-    res.json({
-        response: true
-    })
+app.get('/all', (req, res, query_callback=query_db) => {
+    console.log("Query: " + sql_query);
+    mysql.query(sql_query, (err, result, fields, cb=send_matches, ext=res) => {
+        console.log("Complete. Callback!");
+        cb((result, fields), ext_args);
+    });
 })
 
 var server = app.listen(8080);
