@@ -23,8 +23,13 @@ var app = express();
 
 function send_matches(results, client_res) {
     var res_json = [];
-    console.log(results);
     console.log("Reached send matches function");
+
+    console.log(results[1]);
+
+    for (var i = 0; i < results[0].length; i += 1) {
+
+    }
 
     client_res.json({
         result: results.toString()
