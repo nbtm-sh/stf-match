@@ -34,6 +34,8 @@ function send_players(client_res, gt) {
         });
     }
 
+    console.log(res_json);
+
     client_res.json(res_json);
 }
 
