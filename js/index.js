@@ -40,8 +40,7 @@ app.get('/matches', (req, res) => {
 });
 
 app.get('/all', (req, res, query_callback=query_db) => {
-    console.log("Query: " + sql_query);
-    mysql.query(sql_query, (err, result, fields, cb=send_matches, ext=res) => {
+    mysql.query("SELECT * FROM `matches`;", (err, result, fields, cb=send_matches, ext=res) => {
         console.log("Complete. Callback!");
         cb((result, fields), ext_args);
     });
