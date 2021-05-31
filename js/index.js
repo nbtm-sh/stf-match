@@ -9,7 +9,7 @@ var mysql_connection = mysql.createConnection({
     "database": "stf"
 });
 
-function query(sql_query, callback, ext_args) {
+function query_db(sql_query, callback, ext_args) {
     console.log("Query: " + sql_query);
     mysql.query(sql_query, (err, result, fields, cb=callback, ext=ext_args) => {
         console.log("Complete. Callback!");
@@ -39,7 +39,7 @@ app.get('/matches', (req, res) => {
     sql_db.query(query, send_matches, res);
 });
 
-app.get('/all', (req, res, q=query) => {
+app.get('/all', (req, res, q=query_db) => {
     var query = 'SELECT * FROM `matches`;';
     console.log("GET /all");
     q(query, send_matches, res);
