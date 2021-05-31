@@ -69,7 +69,7 @@ app.get('/matches', (req, res) => {
     sql_db.query(query, send_matches, res);
 });
 
-app.get('/player', (req, res, msql=mysql_connection) => {
+app.get('/player', (req, res, query_callback=null, msql=mysql_connection) => {
     var ids = req.query.p.split(",");
     global_temp = [];
     for (var i = 0; i < ids.length; i += 1) {
