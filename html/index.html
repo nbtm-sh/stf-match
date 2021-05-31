@@ -22,7 +22,19 @@
         </div>
         <script>
             const urlParams = new URLSearchParams(window.location.search);
-            console.log(urlParams.get("u1"));
+            if (urlParams.get("u1") == null) {
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange = function() { 
+                    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                        callback(xmlHttp.responseText);
+                }
+                xmlHttp.open("GET", "http://stf.nbti.net:8080/all", true); // true for asynchronous 
+                xmlHttp.send(null);
+            }
+
+            function callback(st) {
+                alert("Done");
+            }
         </script>
     </body>
 </html>
