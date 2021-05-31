@@ -30,9 +30,9 @@ function send_players(client_res, gt) {
 
     for (var i = 0; i < gt.length; i += 1) {
         res_json.push({
-            id: gt[i].id,
-            uName: gt[i].uName,
-            uCountry: gt[i].uCountry
+            id: gt[i][0].id,
+            uName: gt[i][0].uName,
+            uCountry: gt[i][0].uCountry
         });
     }
 
