@@ -23,14 +23,14 @@ var app = express();
 
 global_temp = []
 
-function send_players(client_res) {
+function send_players(client_res, gt) {
     var res_json = [];
 
-    for (var i = 0; i < global_temp.length; i += 1) {
+    for (var i = 0; i < gt.length; i += 1) {
         res_json.push({
-            id: global_temp[i].id,
-            uName: gloabl_temp[i].uName,
-            uCountry: gloabl_temp[i].uCountry
+            id: gt[i].id,
+            uName: gt[i].uName,
+            uCountry: gt[i].uCountry
         });
     }
 
@@ -73,10 +73,10 @@ app.get('/player', (req, res, query_callback=null, msql=mysql_connection) => {
     var ids = req.query.p.split(",");
     global_temp = [];
     for (var i = 0; i < ids.length; i += 1) {
-        msql.query(`SELECT * FROM \`players\` WHERE id=${ids[i]};`, (err, result, fields, cb=send_players, ext=res, send_results=(i>=ids.length-1)) => {
-            global_temp.push(result);
+        msql.query(`SELECT * FROM \`players\` WHERE id=${ids[i]};`, (err, result, fields, cb=send_players, ext=res, send_results=(i>=ids.length-1), gt=global_temp) => {
+            gt.push(result);
             if (send_results) {
-                cb(ext);
+                cb(ext, gt);
             }
         });
     }
