@@ -28,12 +28,18 @@ function send_matches(results, client_res) {
     console.log(results[0]);
 
     for (var i = 0; i < results[0].length; i += 1) {
-
+        res_json.push({
+            id: results[0].id,
+            uPlayer1: results[0].uPlayer1,
+            uPlayer2: results[0].uPlayer2,
+            uPlayer1Fighter: results[0].uPlayer2Fighter,
+            uPlayer2Fighter: results[0].uPlayer2Fighter,
+            tRound: results[0].tRound,
+            tResult: results[0].tResult
+        });
     }
 
-    client_res.json({
-        result: results.toString()
-    })
+    client_res.json(res_json)
 }
 
 app.get('/matches', (req, res) => {
@@ -43,6 +49,12 @@ app.get('/matches', (req, res) => {
     var query = `SELECT * FROM \`matches\` WHERE (uPlayer1=${player1} OR uPlayer2=${player1}) AND (uPlayer1=${player2} OR uPlayer2=${player2});`;
     sql_db.query(query, send_matches, res);
 });
+
+app.get('/player', (req, res, msql=mysql_connection) => {
+    msql.query(`SELECT * FROM \`players\` WHERE id=${res.query.p};`, (err, result, fields, cb=send_matches, ext=res) => {
+
+    });
+})
 
 app.get('/all', (req, res, query_callback=query_db, msql=mysql_connection) => {
     msql.query("SELECT * FROM `matches`;", (err, result, fields, cb=send_matches, ext=res) => {
