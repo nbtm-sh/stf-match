@@ -77,9 +77,12 @@ app.get('/player', (req, res, query_callback=null, msql=mysql_connection) => {
     var ids = req.query.p.split(",");
     global_temp = [];
     for (var i = 0; i < ids.length; i += 1) {
-        msql.query(`SELECT * FROM \`players\` WHERE id=${ids[i]};`, (err, result, fields, cb=send_players, ext=res, send_results=(i>=ids.length-1), gt=global_temp) => {
+        msql.query(`SELECT * FROM \`players\` WHERE id=${ids[i]};`, (err, result, fields, cb=send_players, ext=res, send_results=(i>=ids.length-1), gt=global_temp, len=i) => {
             gt.push(result);
             if (send_results) {
+                while (gt.length != len) {
+                    // Wait for all responses
+                }
                 cb(ext, gt);
             }
         });
