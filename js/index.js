@@ -40,6 +40,8 @@ function send_matches(results, client_res) {
         });
     }
 
+    console.log(res_json[0]);
+
     client_res.json(res_json)
 }
 
