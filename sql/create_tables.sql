@@ -21,6 +21,4 @@ CREATE TABLE `matches` (
     tDate DATETIME,
     tRound INT,
     tResult INT, -- 1 = Player 1, 2 = Player 2
-    FOREIGN KEY (uPlayer1) REFERENCES players(id),
-    FOREIGN KEY (uPlayer2) REFERENCES players(id)
 );
