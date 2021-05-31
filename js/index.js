@@ -24,6 +24,10 @@ var app = express();
 function send_matches(results, client_res) {
     var res_json = [];
     console.log(results);
+
+    client_res.json({
+        result: results.toString()
+    })
 }
 
 app.get('/matches', (req, res) => {
