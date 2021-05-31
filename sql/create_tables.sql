@@ -1,4 +1,4 @@
-USE DATABASE `stf`;
+USE `stf`;
 
 CREATE TABLE `tournaments` (        -- Tournaments
     id INT NOT NULL PRIMARY KEY,
