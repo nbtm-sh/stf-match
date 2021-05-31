@@ -26,6 +26,8 @@ global_temp = []
 function send_players(client_res, gt) {
     var res_json = [];
 
+    console.log(gt);
+
     for (var i = 0; i < gt.length; i += 1) {
         res_json.push({
             id: gt[i].id,
