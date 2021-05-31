@@ -1,0 +1,22 @@
+{
+  "name": "stfdatabase",
+  "version": "1.0.0",
+  "description": "STF Database API",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nbtm-sh/stf-match.git"
+  },
+  "author": "nbtm-sh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nbtm-sh/stf-match/issues"
+  },
+  "homepage": "https://github.com/nbtm-sh/stf-match#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
