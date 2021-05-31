@@ -40,9 +40,9 @@ app.get('/matches', (req, res) => {
 });
 
 app.get('/all', (req, res, q=query_db) => {
-    var query = 'SELECT * FROM `matches`;';
+    var sql_query = 'SELECT * FROM `matches`;';
     console.log("GET /all");
-    q(query, send_matches, res);
+    q(sql_query, send_matches, res);
 })
 
 var server = app.listen(8080);
