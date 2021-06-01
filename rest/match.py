@@ -20,5 +20,5 @@ class Match:
 
             "tDate": self.tDate.strftime('%Y-%m-%d %H:%M:%S'),
             "tRound": self.tRound,
-            "tResult": self.tResult.id
+            "tResult": 1 if self.tResult.id == self.uPlayer1.id else 2
         }
