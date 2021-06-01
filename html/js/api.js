@@ -125,6 +125,7 @@ function updateTable() {
         try {
             api.getTableData(document.getElementById("resulttable"));
         } catch (e) {
+            console.log("Error");
             window.setTimeout(updateTable, 200);
         }
     }
