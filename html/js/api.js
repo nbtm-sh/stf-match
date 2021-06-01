@@ -89,6 +89,8 @@ class API {
             t.matches[i].tResult = t.getUserById(t.matches[i].tResult);
         }
 
+        console.log(t.matches);
+
         t.wait = false;
     }
     //#endregion
