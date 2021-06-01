@@ -20,5 +20,5 @@ class Match:
 
             "tDate": self.tDate.strftime('%Y-%m-%d %H:%M:%S'),
             "tRound": self.tRound,
-            "tResult": self.tresult.json()
+            "tResult": self.tResult.json()
         }
