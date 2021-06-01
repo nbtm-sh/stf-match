@@ -1,23 +1,59 @@
 var creds = require("./mysql-creds.json");
-var mysql = require("mysql");
+var msql = require("mysql");
 
-var mysql_connection = mysql.createConnection({
-    "host": "localhost",
-    "user": creds.username,
-    "password": creds.password,
-    "database": "stf"
-});
+class SQL {
+    sql_connection = null;
 
-class Sq {
-    static query(sql_query, callback, ext_args) {
-        mysql.query(sql_query, (err, result, fields, cb=callback, ext=ext_args) => {
-            if (!err) {
-                cb(result, ext_args);
-            }
-        })
+    temp_response = "";
+    temp_wait = "";
+
+    constructor() {
+        this.sql_connection = msql.createConnection({
+            "host": "localhost",
+            "user": creds.username,
+            "password": creds.password,
+            "database": "stf"
+        });
+
+        this.sql_connection.connect();
     }
+
+    //#region Non-SQL functions
+    constructUserObjects(sqlResult) {
+        result = [];
+        for (var i = 0; i < sqlResult; i += 1) {
+            result.push({
+                id: sqlResult[i].id,
+                uName: sqlResult[i].uName,
+                uCountry: sqlResult[i].uCountry
+            });
+        }
+
+        return result;
+    }
+    //#endregion
+
+    //#region SQL Query functions
+    getUsernameFromId(id) {
+        query = `SELECT * FROM \`players\` WHERE id=${id};`;
+        this.wait = true;
+        mysql.query(sql_query, (err, result, fields, t=this) => {
+            if (result == null) {
+                // No results
+                t.temp_response = [];
+                t.wait = false;
+            } else {
+                t.temp_response = this.constructUserObjects(result);
+                t.wait = false;
+            }
+        });
+
+        while (this.wait) {
+            // Do nothing
+        }
+        return this.constructUserObjects(this.temp_response);
+    }
+    //#endregion
 }
 
-module.exports = Sq;
-
-mysql_connection.connect();
+module.exports = SQL;
