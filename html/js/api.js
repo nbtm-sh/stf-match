@@ -122,7 +122,11 @@ function updateTable() {
     if (api.wait) {
         window.setTimeout(updateTable, 200);
     } else {
-        api.getTableData(document.getElementById("resulttable"));
+        try {
+            api.getTableData(document.getElementById("resulttable"));
+        } catch (e) {
+            window.setTimeout(updateTable, 200);
+        }
     }
 }
 
