@@ -30,11 +30,15 @@ function send_players(client_res, gt) {
     console.log(gt);
 
     for (var i = 0; i < gt.length; i += 1) {
-        res_json.push({
-            id: gt[i][0].id,
-            uName: gt[i][0].uName,
-            uCountry: gt[i][0].uCountry
-        });
+        try {
+            res_json.push({
+                id: gt[i][0].id,
+                uName: gt[i][0].uName,
+                uCountry: gt[i][0].uCountry
+            });
+        } catch (e) {
+            continue;
+        }
     }
 
     console.log(res_json);
@@ -50,15 +54,19 @@ function send_matches(results, client_res) {
     console.log(results[0].length);
 
     for (var i = 0; i < results[0].length; i += 1) {
-        res_json.push({
-            id: results[0][i].id,
-            uPlayer1: results[0][i].uPlayer1,
-            uPlayer2: results[0][i].uPlayer2,
-            uPlayer1Fighter: results[0][i].uPlayer1Fighter,
-            uPlayer2Fighter: results[0][i].uPlayer2Fighter,
-            tRound: results[0][i].tRound,
-            tResult: results[0][i].tResult
-        });
+        try {
+            res_json.push({
+                id: results[0][i].id,
+                uPlayer1: results[0][i].uPlayer1,
+                uPlayer2: results[0][i].uPlayer2,
+                uPlayer1Fighter: results[0][i].uPlayer1Fighter,
+                uPlayer2Fighter: results[0][i].uPlayer2Fighter,
+                tRound: results[0][i].tRound,
+                tResult: results[0][i].tResult
+            });
+        } catch (e) {
+            continue;
+        }
     }
 
     console.log(res_json[0]);
