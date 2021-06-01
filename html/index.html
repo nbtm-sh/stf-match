@@ -33,6 +33,7 @@
             const urlParams = new URLSearchParams(window.location.search);
 
             var stats = [];
+            var user_ids = [];
 
             if (urlParams.get("u1") == null) {
                 var xmlHttp = new XMLHttpRequest();
@@ -42,10 +43,30 @@
                 }
                 xmlHttp.open("GET", "http://stf.nbti.net:8080/all", true); // true for asynchronous 
                 xmlHttp.send(null);
+
+                xmlHttp.onreadystatechange = function() { 
+                    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                        callback_player_data(xmlHttp.responseText);
+                }
             }
 
             function callback_stats(st) {
-                stats = JSON.parse(st)
+                stats = JSON.parse(st);
+                user_ids = [];
+                console.log(JSON.parse(st));
+
+                for (var i = 0; i < stats.length; i += 1) {
+                    if (user_ids.indexOf(stats[i].uPlayer1) == -1) {
+                        user_ids.push(stats[i].uPlayer1);
+                    }
+                    if (user_ids.indexOf(stats[i].uPlayer2) == -1) {
+                        user_ids.push(stats[i].uPlayer2);
+                    }
+                }
+            }
+
+            function callback_player_data(st) {
+                stats = JSON.parse(st);
                 console.log(JSON.parse(st));
             }
         </script>
