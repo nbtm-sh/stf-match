@@ -30,7 +30,7 @@ class SQL {
 
     //#region SQL Query functions
     getUsernameFromId(id) {
-        query = `SELECT * FROM \`players\` WHERE id=${id};`;
+        var query = `SELECT * FROM \`players\` WHERE id=${id};`;
         this.wait = true;
         this.sql_connection.query(sql_query, (err, result, fields, t=this) => {
             if (result == null) {
