@@ -9,11 +9,6 @@ class API {
     }
 
     //#region   API method calls
-    getAllUserData() {
-        WebRequest.get(`http://${this.domain}/players`, this.cb_getAllUserData, this, this.ecb_getAllUserData);
-        this.wait = true;
-    }
-
     getAllMatches() {
         WebRequest.get(`http://${this.domain}/all`, this.cb_getAllMatches, this, this.ecb_getAllMatches);
         this.wait = true;
@@ -80,20 +75,9 @@ class API {
     //#endregion
 
     //#region Correct response callback functions
-    cb_getAllUserData(st, t) {
-        t.users = JSON.parse(st);
-        t.wait = false;
-    }
 
     cb_getAllMatches(st, t) {
         t.matches = JSON.parse(st);
-
-        // Replace the user IDs with user objects
-        for (var i = 0; i < t.matches.length; i += 1) {
-            t.matches[i].uPlayer1 = t.getUserById(t.matches[i].uPlayer1);
-            t.matches[i].uPlayer2 = t.getUserById(t.matches[i].uPlayer2);
-            t.matches[i].tResult = t.getUserById(t.matches[i].tResult);
-        }
 
         t.wait = false;
     }
