@@ -44,7 +44,15 @@
                 xmlHttp = new XMLHttpRequest();
                 xmlHttp.onreadystatechange = function() { 
                     if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-                        callback_stats(xmlHttp.responseText);
+                        download_user_ids(xmlHttp.responseText, callback_stats);
+                }
+                xmlHttp.open("GET", "http://stf.nbti.net:8080/all", true); // true for asynchronous 
+                xmlHttp.send(null);
+            } else {
+                xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange = function() { 
+                    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                        download_user_ids(xmlHttp.responseText, callback_stats);
                 }
                 xmlHttp.open("GET", "http://stf.nbti.net:8080/all", true); // true for asynchronous 
                 xmlHttp.send(null);
@@ -60,6 +68,28 @@
                         user_ids.push(stats[i].uPlayer2);
                     }
                 }
+            }
+
+            function get_user_by_id(username) {
+                for (var i = 0; i < user_ids.length; i += 1) {
+                    if (user_ids[i].username == username) {
+                        return user_ids[i];
+                    }
+                }
+            }
+
+            function download_user_ids(st, next_function) {
+                stats = JSON.parse(st);
+                get_user_ids(stats);
+
+                next_function(st);
+            }
+
+            function callback_select_stats(st, next_function) {
+                stats = JSON.parse(st);
+                get_user_ids(stats);
+
+                next_function(st);
             }
 
             function callback_stats(st) {
