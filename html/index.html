@@ -27,6 +27,9 @@
                     <th>Fighter</th>
                     <th>Player 2</th>
                 </tr>
+                <tr>
+                    <td>Loading...</td>
+                </tr>
             </table>
         </div>
         <script>
@@ -47,11 +50,8 @@
                 xmlHttp.send(null);
             }
 
-            function callback_stats(st) {
-                stats = JSON.parse(st);
+            function get_user_ids(results) {user_ids = [];
                 user_ids = [];
-                console.log(JSON.parse(st));
-
                 for (var i = 0; i < stats.length; i += 1) {
                     if (user_ids.indexOf(stats[i].uPlayer1) == -1) {
                         user_ids.push(stats[i].uPlayer1);
@@ -60,6 +60,11 @@
                         user_ids.push(stats[i].uPlayer2);
                     }
                 }
+            }
+
+            function callback_stats(st) {
+                stats = JSON.parse(st);
+                get_user_ids(stats);
 
                 xmlHttp.onreadystatechange = function() { 
                     if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
