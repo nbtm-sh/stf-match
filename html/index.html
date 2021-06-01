@@ -28,7 +28,7 @@
                     if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
                         callback(xmlHttp.responseText);
                 }
-                xmlHttp.open("GET", "http://stfapi.nbti.net/all", true); // true for asynchronous 
+                xmlHttp.open("GET", "http://stf.nbti.net:8080/all", true); // true for asynchronous 
                 xmlHttp.send(null);
             }
 
