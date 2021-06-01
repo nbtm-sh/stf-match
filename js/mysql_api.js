@@ -32,23 +32,9 @@ class SQL {
     getUsernameFromId(id) {
         var query = `SELECT * FROM \`players\` WHERE id=${id};`;
         this.wait = true;
-        this.sql_connection.query(query, (err, result, fields, t=this) => {
-            if (result == null) {
-                // No results
-                t.temp_response = [];
-                console.log("No results");
-                t.wait = false;
-            } else {
-                t.temp_response = this.constructUserObjects(result);
-                console.log("Results");
-                t.wait = false;
-            }
-        });
+        var result = await this.sql_connection.query(query);
 
-        while (this.wait) {
-            // Do nothing
-        }
-        return this.temp_response;
+        return result;
     }
     //#endregion
 }
