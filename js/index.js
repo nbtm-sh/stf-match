@@ -81,7 +81,7 @@ app.get('/player', (req, res, query_callback=null, msql=mysql_connection) => {
     for (var i = 0; i < ids.length; i += 1) {
         console.log(ids[i]);
         console.log(i);
-        console.log((i>=ids.length-1));
+        console.log((i==ids.length-1));
         console.log(global_temp.length);
         msql.query(`SELECT * FROM \`players\` WHERE id=${ids[i]};`, (err, result, fields, cb=send_players, ext=res, send_results=(i==ids.length-1), gt=global_temp, len=i) => {
             gt.push(result);
