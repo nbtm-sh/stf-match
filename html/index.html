@@ -89,6 +89,7 @@
                 for (var i = 0; i < stats.length; i += 1) {
                     stats[i].uPlayer1 = get_user_by_id(stats[i].uPlayer1);
                     stats[i].uPlayer2 = get_user_by_id(stats[i].uPlayer2);
+                    stats[i].tResult == 1 ? stats[i].tResult = stats[i].uPlayer1 : stats[i].tResult = stats[i].uPlayer2;
                 }
 
                 // Start adding items to the table
@@ -102,6 +103,21 @@
                         <th>Player 2</th>
                     </tr>
                 `;
+
+                for (var i = 0; i < stats.length; i += 1) {
+                    html_string += `
+                        <tr>
+                            <td>${stats[i].uPlayer1.uName}</td>
+                            <td>${stats[i].uPlayer1Fighter}</td>
+                            <td>${stats[i].tResult.uName}</td>
+                            <td>${stats[i].uPlayer2Fighter}</td>
+                            <td>${stats[i].uPlayer2.uName}</td>
+                        </tr>
+                    `;
+                }
+
+                var table = document.getElementById("resulttable").innerHTML = html_string;
+
                 console.log(stats);
             }
         </script>
