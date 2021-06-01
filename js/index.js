@@ -76,6 +76,7 @@ app.get('/matches', (req, res) => {
 app.get('/player', (req, res, query_callback=null, msql=mysql_connection) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     var ids = req.query.p.split(",");
+    console.log(ids);
     global_temp = [];
     for (var i = 0; i < ids.length; i += 1) {
         console.log(ids[i]);
