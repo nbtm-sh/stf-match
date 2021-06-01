@@ -66,12 +66,15 @@ function send_matches(results, client_res) {
     client_res.json(res_json)
 }
 
-app.get('/matches', (req, res) => {
+app.get('/matches', (req, res, query_callback=null, msql=mysql_connection, cb=send_matches) => {
     var player1 = req.query.u1;
     var player2 = req.query.u2;
 
     var query = `SELECT * FROM \`matches\` WHERE (uPlayer1=${player1} OR uPlayer2=${player1}) AND (uPlayer1=${player2} OR uPlayer2=${player2});`;
-    sql_db.query(query, send_matches, res);
+    msql.query(query, (err, result, fields, cb=send_matches, ext=res) => {
+        console.log("Complete. Callback!");
+        cb([result, fields], ext);
+    });
 });
 
 app.get('/player', (req, res, query_callback=null, msql=mysql_connection) => {
