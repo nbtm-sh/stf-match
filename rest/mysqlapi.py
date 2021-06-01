@@ -91,3 +91,22 @@ class SQLAPI:
                 ))
         
         return results
+    
+    def get_players(self):
+        """ Return player objects of the matching usernames.
+        Multiple usernames can be suplied via a list """
+        
+        query = f"SELECT * FROM `players`;"
+        cursor = self.database_connection.cursor()
+        cursor.execute(query)
+
+        result = cursor.fetchall()
+        results = []
+        for i in result:
+            results.append(Player(
+                id=i[0],
+                uName=i[1],
+                uCountry=i[2]
+                ))
+        
+        return results
