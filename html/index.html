@@ -35,8 +35,10 @@
             var stats = [];
             var user_ids = [];
 
+            var xmlHttp;
+
             if (urlParams.get("u1") == null) {
-                var xmlHttp = new XMLHttpRequest();
+                xmlHttp = new XMLHttpRequest();
                 xmlHttp.onreadystatechange = function() { 
                     if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
                         callback_stats(xmlHttp.responseText);
@@ -58,6 +60,16 @@
                         user_ids.push(stats[i].uPlayer2);
                     }
                 }
+
+                xmlHttp.onreadystatechange = function() { 
+                    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                        callback_player_data(xmlHttp.responseText);
+                }
+
+                var user_data_string = user_ids.join(",");
+
+                xmlHttp.open("GET", `http://stf.nbti.net:8080/player?p=${user_data_string}`, true); // true for asynchronous 
+                xmlHttp.send(null);
 
                 console.log(user_ids);
             }
