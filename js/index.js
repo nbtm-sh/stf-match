@@ -21,7 +21,8 @@ mysql_connection.connect();
 
 var app = express();
 
-global_temp = []
+global_temp = [];
+intent_global_length = 0;
 
 function send_players(client_res, gt) {
     var res_json = [];
@@ -76,6 +77,7 @@ app.get('/matches', (req, res) => {
 app.get('/player', (req, res, query_callback=null, msql=mysql_connection) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     var ids = req.query.p.split(",");
+    intent_global_length = ids.length;
     console.log(ids);
     global_temp = [];
     for (var i = 0; i < ids.length; i += 1) {
@@ -83,10 +85,10 @@ app.get('/player', (req, res, query_callback=null, msql=mysql_connection) => {
         console.log(i);
         console.log((i==ids.length-1));
         console.log(global_temp.length);
-        msql.query(`SELECT * FROM \`players\` WHERE id=${ids[i]};`, (err, result, fields, cb=send_players, ext=res, send_results=(i==ids.length-1), gt=global_temp, len=i) => {
+        msql.query(`SELECT * FROM \`players\` WHERE id=${ids[i]};`, (err, result, fields, cb=send_players, ext=res, send_results=(i==ids.length-1), gt=global_temp, len=i, intent=intent_global_length) => {
             gt.push(result);
             console.log(send_results + i.toString());
-            if (send_results == true) {
+            if (gt.length == intent) {
                 console.log("Callback");
                 cb(ext, gt);
             }
