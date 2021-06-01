@@ -64,3 +64,30 @@ class SQLAPI:
                 ))
         
         return results
+    
+    def get_players_by_country(self, countries):
+        """ Return player objects of the matching usernames.
+        Multiple usernames can be suplied via a list """
+        if type(countries) != list:
+            countries = [countries]
+        
+        query = f"SELECT * FROM `players` WHERE "
+        for i in range(len(countries)):
+            if (i >= 1 & i+1 != len(countries)):
+                query += " OR "
+            query += "`uName`=\"" + str(countries[i]) + "\""
+        query += ";"
+
+        cursor = self.database_connection.cursor()
+        cursor.execute(query)
+
+        result = cursor.fetchall()
+        results = []
+        for i in result:
+            results.append(Player(
+                id=i[0],
+                uName=i[1],
+                uCountry=i[2]
+                ))
+        
+        return results
