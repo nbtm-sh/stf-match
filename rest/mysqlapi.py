@@ -44,14 +44,14 @@ class SQLAPI:
     def getPlayersByUsername(self, usernames):
         """ Return player objects of the matching usernames.
         Multiple usernames can be suplied via a list """
-        if type(ids) != list:
-            ids = [ids]
+        if type(usernames) != list:
+            usernames = [usernames]
         
         query = f"SELECT * FROM `players` WHERE "
-        for i in range(len(ids)):
-            if (i >= 1 & i+1 != len(ids)):
+        for i in range(len(usernames)):
+            if (i >= 1 & i+1 != len(usernames)):
                 query += " OR "
-            query += "`uName`=" + str(ids[i])
+            query += "`uName`=" + str(usernames[i])
         query += ";"
 
         print(query)
