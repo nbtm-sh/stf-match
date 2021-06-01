@@ -45,8 +45,8 @@ def get_players():
 
 @app.route('/matches')
 def get_matches():
-    player1 = request.args.get("u1")
-    player2 = request.args.get("u2")
+    player1 = None if request.args.get("u1") == '' else request.args.get("u1")
+    player2 = None if request.args.get("u2") == '' else request.args.get("u1")
 
     result = []
 
