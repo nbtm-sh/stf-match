@@ -2,9 +2,6 @@ var creds = require("./mysql-creds.json");
 var msql = require("mysql");
 
 class SQL {
-    temp_response = "";
-    temp_wait = "";
-
     constructor() {
         this.sql_connection = msql.createConnection({
             "host": "localhost",
