@@ -32,7 +32,7 @@ class SQL {
     getUsernameFromId(id) {
         var query = `SELECT * FROM \`players\` WHERE id=${id};`;
         this.wait = true;
-        var result = await this.sql_connection.query(query);
+        var result = this.sql_connection.query(query);
 
         return result;
     }
