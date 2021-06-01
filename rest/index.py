@@ -23,5 +23,7 @@ def get_players():
     uname = request.args.get("un")
     print(uname)
 
+    return jsonify({"response": True})
+
 if __name__ == "__main__":
     app.run("stf.nbti.net", 8080)
