@@ -14,3 +14,13 @@ body {
     width: 100%;
     bottom: 50%;
 }
+
+.results #resulttable {
+    border: 1px black solid;
+}
+.results #resulttable tr {
+    border-bottom: 1px black solid;
+}
+.results #resulttable th {
+    border-left: 1px #ccc solid;
+}

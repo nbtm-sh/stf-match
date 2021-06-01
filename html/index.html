@@ -18,7 +18,16 @@
             </form>
         </div>
         <div class="results">
-            
+            <table id="resulttable">
+                <tr>
+                    <th>Player 1</th>
+                    <th>Fighter</th>
+                    <th>Round</th>
+                    <th>Winner</th>
+                    <th>Fighter</th>
+                    <th>Player 2</th>
+                </tr>
+            </table>
         </div>
         <script>
             const urlParams = new URLSearchParams(window.location.search);
@@ -34,6 +43,7 @@
 
             function callback(st) {
                 alert("Done");
+                console.log(JSON.parse(st));
             }
         </script>
     </body>
