@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import jsonify
+from flask import request
 import mysql_api
 import json
 
@@ -17,9 +18,10 @@ database_interface = mysql_api.SQLAPI(
 
 app = Flask(__name__)
 
-@app.route('/')
-def hello_world():
-    return jsonify({"response": True})
+@app.route('/players')
+def get_players():
+    uname = request.args.get("un")
+    print(uname)
 
 if __name__ == "__main__":
     app.run("127.0.0.1", 8080)
