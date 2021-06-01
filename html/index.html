@@ -43,11 +43,6 @@
                 }
                 xmlHttp.open("GET", "http://stf.nbti.net:8080/all", true); // true for asynchronous 
                 xmlHttp.send(null);
-
-                xmlHttp.onreadystatechange = function() { 
-                    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-                        callback_player_data(xmlHttp.responseText);
-                }
             }
 
             function callback_stats(st) {
