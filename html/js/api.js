@@ -164,7 +164,7 @@ function updateTableSelectAsync() {
         } catch (e) {
             console.log("Failed getting data from server. Retrying...");
             api.getAllUserData();
-            window.setTimeout(updateTableSelectAsync, 1000);
+            window.setTimeout(updateTableSelectAsync, 200);
         }
     }
 }
