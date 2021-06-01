@@ -1,5 +1,7 @@
 class WebRequest {
     static get(url, callback, ext_args, error_callback=null) {
+        var xmlHttp;
+
         xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function() { 
             if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
