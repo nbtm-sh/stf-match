@@ -75,6 +75,7 @@ app.get('/matches', (req, res, query_callback=null, msql=mysql_connection, cb=se
         console.log("Complete. Callback!");
         console.log(result);
         console.log(fields);
+        console.log(query);
         cb([result, fields], ext);
     });
 });
