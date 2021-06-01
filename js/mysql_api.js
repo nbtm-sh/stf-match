@@ -15,7 +15,7 @@ class SQL {
 
     //#region Non-SQL functions
     constructUserObjects(sqlResult) {
-        result = [];
+        var result = [];
         for (var i = 0; i < sqlResult; i += 1) {
             result.push({
                 id: sqlResult[i].id,
@@ -46,7 +46,7 @@ class SQL {
         while (this.wait) {
             // Do nothing
         }
-        return this.constructUserObjects(this.temp_response);
+        return this.temp_response;
     }
     //#endregion
 }
