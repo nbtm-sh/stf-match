@@ -3,10 +3,12 @@ class Player:
         self.id = id
         self.uName = uName
         self.uCountry = uCountry
+        self.qualified = True
     
     def json(self):
         return {
             "id": self.id,
             "uName": self.uName,
-            "uCountry": self.uCountry
+            "uCountry": self.uCountry,
+            "bQualified": self.qualified
         }
