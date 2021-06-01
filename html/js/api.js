@@ -158,7 +158,11 @@ if (urlParams.get("u1") == null) {
     updateTableAll();
 } else {
     api.getAllUserData();
-    api.getMatchup(urlParams.get("u1"), urlParams.get("u2"));
 
-    updateTableSelect(urlParams.get("u1"), urlParams.get("u2"));
+    var u1 = getUserByUsername(urlParams.get("u1"));
+    var u2 = getUserByUsername(urlParams.get("u2"));
+
+    api.getMatchup(u1.id, u2.id);
+
+    updateTableSelect(u1.id, u2.id);
 }
