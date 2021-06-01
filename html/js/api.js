@@ -18,13 +18,18 @@ class API {
         WebRequest.get(`http://${this.domain}/all`, this.cb_getAllMatches, this, this.ecb_getAllMatches);
         this.wait = true;
     }
+
+    getMatchup(u1, u2) {
+        WebRequest.get(`http://${this.domain}/matches?u1=${u1}&u2=${u2}`, this.cb_getAllMatches, this, this.ecb_getAllMatches);
+        this.wait = true;
+    }
     //#endregion
 
     //#region Non-API functions
     
     getUserById(id) {
         for (var i = 0; i < this.users.length; i += 1) {
-            if (this.users[i].id == id) {
+            if (this.users[i].id == Number(id)) {
                 return this.users[i];
             }
         }
