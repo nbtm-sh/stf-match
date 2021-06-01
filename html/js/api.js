@@ -61,14 +61,14 @@ class API {
 
         for (var i = 0; i < this.matches.length; i += 1) {
             htmlData += `
-                <tr>
+                <a href="/match?m=${this.matches[i].id.toString()}"><tr>
                     <td data="player1" >${this.matches[i].uPlayer1.uName}</td>
                     <td data="player1Figher">${this.matches[i].uPlayer1Fighter}</td>
                     <td data="winner">${this.matches[i].tResult.uName}</td>
                     <td data="winner">${this.matches[i].tRound}</td>
                     <td data="player1Figher">${this.matches[i].uPlayer2Fighter}</td>
                     <td data="player1" >${this.matches[i].uPlayer2.uName}</td>
-                </tr>
+                </tr></a>
             `;
         }
 
