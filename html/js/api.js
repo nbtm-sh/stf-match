@@ -10,7 +10,7 @@ class API {
 
     //#region   API method calls
     getAllMatches() {
-        WebRequest.get(`http://${this.domain}/all`, this.cb_getAllMatches, this, this.ecb_getAllMatches);
+        WebRequest.get(`http://${this.domain}/matches`, this.cb_getAllMatches, this, this.ecb_getAllMatches);
         this.wait = true;
     }
 
