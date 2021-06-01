@@ -192,3 +192,9 @@ class SQLAPI:
     
     def get_matchups(self, u1, u2):
         return self.get_matches(f"SELECT * FROM `matches` WHERE (`uPlayer1`={u1.id} OR `uPlayer2`={u1.id}) AND (`uPlayer1`={u2.id} or `uPlayer2`={u2.id});")
+    
+    def get_matches_played_by(self, u1):
+        return self.get_matches(f"SELECT * FROM `matches` WHERE `uPlayer1`={u1.id} OR `uPlayer2`={u1.id};")
+    
+    def get_all_matches(self):
+        return self.get_matches("SELECT * FROM `matches`;")
