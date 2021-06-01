@@ -49,7 +49,7 @@ class API {
 
     getTableData(htmlElement) {
         var htmlData = `
-            <tr>
+            <tbody><tr>
                 <th>Player 1</th>
                 <th>Fighter</th>
                 <th>Winner</th>
@@ -71,6 +71,8 @@ class API {
                 </a></tr>
             `;
         }
+
+        htmlData += "</tbody>"
 
         htmlElement.innerHTML = htmlData;
     }
