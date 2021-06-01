@@ -36,8 +36,6 @@ function send_players(client_res, gt) {
         });
     }
 
-    client_res.header("Access-Control-Allow-Origin: *");
-
     console.log(res_json);
 
     client_res.json(res_json);
@@ -63,7 +61,6 @@ function send_matches(results, client_res) {
     }
 
     console.log(res_json[0]);
-    client_res.header("Access-Control-Allow-Origin: *");
 
     client_res.json(res_json)
 }
@@ -77,6 +74,7 @@ app.get('/matches', (req, res) => {
 });
 
 app.get('/player', (req, res, query_callback=null, msql=mysql_connection) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
     var ids = req.query.p.split(",");
     global_temp = [];
     for (var i = 0; i < ids.length; i += 1) {
@@ -93,6 +91,7 @@ app.get('/player', (req, res, query_callback=null, msql=mysql_connection) => {
 })
 
 app.get('/all', (req, res, query_callback=query_db, msql=mysql_connection) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
     msql.query("SELECT * FROM `matches`;", (err, result, fields, cb=send_matches, ext=res) => {
         console.log("Complete. Callback!");
         cb([result, fields], ext);
