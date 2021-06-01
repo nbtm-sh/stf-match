@@ -92,13 +92,17 @@
                 next_function(st);
             }
 
-            function callback_stats(st) {
+            function callback_all(st) {
+                get_player_data(st, callback_player_data);
+            }
+
+            function get_player_data(st, next_function) {
                 stats = JSON.parse(st);
                 get_user_ids(stats);
 
                 xmlHttp.onreadystatechange = function() { 
                     if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-                        callback_player_data(xmlHttp.responseText);
+                        next_function(xmlHttp.responseText);
                 }
 
                 var user_data_string = user_ids.join(",");
@@ -117,7 +121,7 @@
                 }
             }
 
-            function callback_player_data(st) {
+            function parse_player_data(st) {
                 user_data = JSON.parse(st);
                 console.log(JSON.parse(st));
 
@@ -126,6 +130,11 @@
                     stats[i].uPlayer2 = get_user_by_id(stats[i].uPlayer2);
                     stats[i].tResult == 1 ? stats[i].tResult = stats[i].uPlayer1 : stats[i].tResult = stats[i].uPlayer2;
                 }
+            }
+
+
+            function callback_player_data(st) {
+                parse_player_data(st);
 
                 // Start adding items to the table
                 var html_string = `
