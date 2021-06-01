@@ -12,7 +12,7 @@ class SQLAPI:
             database=database
         )
     
-    def getPlayersById(self, ids):
+    def get_players_by_id(self, ids):
         """ Return player objects of the matching ids.
         Multiple IDs can be suplied via a list """
         if type(ids) != list:
@@ -24,9 +24,6 @@ class SQLAPI:
                 query += " OR "
             query += "`id`=" + str(ids[i])
         query += ";"
-
-        print(query)
-
         cursor = self.database_connection.cursor()
         cursor.execute(query)
 
@@ -41,7 +38,7 @@ class SQLAPI:
         
         return results
     
-    def getPlayersByUsername(self, usernames):
+    def get_players_by_username(self, usernames):
         """ Return player objects of the matching usernames.
         Multiple usernames can be suplied via a list """
         if type(usernames) != list:
@@ -53,8 +50,6 @@ class SQLAPI:
                 query += " OR "
             query += "`uName`=\"" + str(usernames[i]) + "\""
         query += ";"
-
-        print(query)
 
         cursor = self.database_connection.cursor()
         cursor.execute(query)
