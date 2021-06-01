@@ -62,6 +62,8 @@ def get_matches():
             except ValueError:
                 players[i] = database_interface.get_players_by_username(players[i])
     
+    print(players)
+
     if len(players) == 0:
         result = database_interface.get_all_matches()
     elif len(players) == 1:
