@@ -5,12 +5,12 @@ class API {
 
     }
 
-    getAllUserData(this) {
+    getAllUserData() {
         WebRequest.get("http://stf.nbti.net:8080/players", this.cb_getAllUserData, this);
     }
 
-    cb_getAllUserData(this, st) {
-        this.users = JSON.parse(st);
+    cb_getAllUserData(t, st) {
+        t.users = JSON.parse(st);
     }
 }
 
