@@ -67,6 +67,7 @@ function send_matches(results, client_res) {
 }
 
 app.get('/matches', (req, res, query_callback=null, msql=mysql_connection, cb=send_matches) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
     var player1 = req.query.u1;
     var player2 = req.query.u2;
 
