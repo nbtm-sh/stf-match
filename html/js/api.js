@@ -15,7 +15,7 @@ class API {
     }
 
     getAllMatches() {
-        WebRequest.get(`http://${this.domain}/all`, this.cb_getAllUserData, this, this.ecb_getAllUserData);
+        WebRequest.get(`http://${this.domain}/all`, this.cb_getAllMatches, this, this.ecb_getAllMatches);
         this.wait = true;
     }
     //#endregion
