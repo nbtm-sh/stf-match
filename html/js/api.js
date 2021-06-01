@@ -114,12 +114,6 @@ class API {
 
 const api = new API();
 
-api.getAllUserData();
-api.getAllMatches();
-
-console.log(api.users);
-console.log(api.matches);
-
 function updateTableAll() {
     console.log("Update table");
     if (api.wait) {
@@ -136,4 +130,35 @@ function updateTableAll() {
     }
 }
 
-updateTableAll();
+function updateTableSelect(u1, u2) {
+    console.log("Update table");
+    if (api.wait) {
+        window.setTimeout(updateTableSelect, 200);
+    } else {
+        try {
+            api.getTableData(document.getElementById("resulttable"));
+        } catch (e) {
+            console.log("Failed getting data from server. Retrying...");
+            api.getAllUserData();
+            api.getMatchup(u1, u2);
+            window.setTimeout(updateTableSelect, 1000);
+        }
+    }
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+
+if (urlParams.get("u1") == null) {
+    api.getAllUserData();
+    api.getAllMatches();
+    
+    console.log(api.users);
+    console.log(api.matches);
+
+    updateTableAll();
+} else {
+    api.getAllUserData();
+    api.getMatchup(urlParams.get("u1"), urlParams.get("u2"));
+
+    updateTableSelect(urlParams.get("u1"), urlParams.get("u2"));
+}
