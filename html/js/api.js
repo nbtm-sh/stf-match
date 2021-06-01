@@ -113,4 +113,4 @@ api.getAllMatches();
 
 window.setTimeout(function() {
     api.getTableData(document.getElementById("resulttable"));
-}, 1500);
+}, 2000);
