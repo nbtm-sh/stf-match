@@ -51,6 +51,7 @@ def get_matches():
     players = [player1, player2]
     try:
         players.remove(None)
+        players.remove(None)
     except Exception:
         pass
 
