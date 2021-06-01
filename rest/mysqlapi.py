@@ -1,5 +1,7 @@
 import mysql.connector
 from player import Player
+from match import Match
+import datetime
 
 class SQLAPI:
     database_connection = None
@@ -110,3 +112,82 @@ class SQLAPI:
                 ))
         
         return results
+    
+    def update_player(self, username=None, country=None):
+        query = "UPDATE `players` ("
+        append_data = []
+        append_values = []
+
+        if username != None:
+            append_data.append("`uName`")
+            append_values.append("\"" + username + "\"")
+        if country != None:
+            append_data.append("`uCountry`")
+            append_values.append("\"" + country + "\"")
+        
+        query += ", ".join(append_data)
+        query += ") VALUES ("
+        query += ", ".join(append_values)
+        query += ")"
+
+        cursor = self.database_connection.cursor()
+        cursor.execute(query)
+    
+    def get_last_id(self, table):
+        query = f"SELECT `id` FROM `{table}` ORDER BY `id` desc;"
+        
+        cursor = self.database_connection.cursor()
+        cursor.execute(query)
+
+        result = cursor.fetchall()
+
+        return result[0][0]
+
+    def create_player(self, username, country):
+        query = f"INSERT INTO `players` (`id`, `uName`, `uCountry`) VALUES ({self.get_last_id('players')}, \"{username}\", \"{country}\");"
+
+        cursor = self.database_connection.cursor()
+        cursor.execute(query)
+    
+    def get_matches(self, query="SELECT * FROM `matches`;"):
+        """ Get all matches """
+
+        cursor = self.database_connection.cursor()
+        cursor.execute(query)
+
+        results = cursor.fetchall()
+        result_objects = []
+
+        # Warning!! Hacky shit ahead
+        # Instead of adding a new column to the database
+        # Make the id negative to indicate that the player was disqualified from the match
+
+        dq_index_1 = []
+        dq_index_2 = []
+
+        x = 0
+        for i in results:
+            if i[1] < 0:
+                dq_index_1.append(x)
+            if i[2] < 0:
+                dq_index_2.append(x)
+            
+            result_objects.append(Match(
+                i[0],
+                self.get_players_by_id(abs(i[1]))[0],
+                self.get_players_by_id(abs(i[2]))[0],
+                i[3],
+                datetime.datetime.now() if i[4] == None else datetime.datetime.strptime(i[4], '%Y-%m-%d %H:%M:%S'),
+                i[5],
+                i[6]
+                ))
+        for i in dq_index_1:
+            result_objects[i].uPlayer1.qualified = False
+
+        for i in dq_index_2:
+            result_objects[i].uPlayer2.qualified = False
+        
+        return result_objects
+    
+    def get_matchups(self, u1, u2):
+        return self.get_matches(f"SELECT * FROM \`matches\` WHERE (\`uPlayer1\`={u1.id} OR \`uPlayer2\`={u1.id}) AND (\`uPlayer1\`={u2.id} or \`uPlayer2\`={u2.id});")
