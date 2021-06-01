@@ -73,6 +73,8 @@ app.get('/matches', (req, res, query_callback=null, msql=mysql_connection, cb=se
     var query = `SELECT * FROM \`matches\` WHERE (uPlayer1=${player1} OR uPlayer2=${player1}) AND (uPlayer1=${player2} OR uPlayer2=${player2});`;
     msql.query(query, (err, result, fields, cb=send_matches, ext=res) => {
         console.log("Complete. Callback!");
+        console.log(result);
+        console.log(fields);
         cb([result, fields], ext);
     });
 });
