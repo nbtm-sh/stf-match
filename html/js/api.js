@@ -127,7 +127,9 @@ function updateTable() {
             api.getTableData(document.getElementById("resulttable"));
         } catch (e) {
             console.log("Error");
-            window.setTimeout(updateTable, 200);
+            api.getAllUserData();
+            api.getAllMatches();
+            window.setTimeout(updateTable, 1000);
         }
     }
 }
