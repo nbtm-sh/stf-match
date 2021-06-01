@@ -77,6 +77,8 @@ class API {
         console.log(st);
         t.users = JSON.parse(st);
         t.wait = false;
+
+        console.log(t.users);
     }
 
     cb_getAllMatches(st, t) {
@@ -112,6 +114,9 @@ const api = new API();
 
 api.getAllUserData();
 api.getAllMatches();
+
+console.log(api.users);
+console.log(api.matches);
 
 window.setTimeout(function() {
     api.getTableData(document.getElementById("resulttable"));
