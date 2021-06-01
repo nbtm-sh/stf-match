@@ -119,6 +119,7 @@ console.log(api.users);
 console.log(api.matches);
 
 function updateTable() {
+    console.log("Update table");
     if (api.wait) {
         window.setTimeout(updateTable, 200);
     } else {
