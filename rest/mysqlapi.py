@@ -177,9 +177,10 @@ class SQLAPI:
                 self.get_players_by_id(abs(i[1]))[0],
                 self.get_players_by_id(abs(i[2]))[0],
                 i[3],
-                datetime.datetime.now() if i[4] == None else datetime.datetime.strptime(i[4], '%Y-%m-%d %H:%M:%S'),
-                i[5],
-                i[6]
+                i[4],
+                datetime.datetime.now() if i[5] == None else datetime.datetime.strptime(i[4], '%Y-%m-%d %H:%M:%S'),
+                i[6],
+                i[7]
                 ))
         for i in dq_index_1:
             result_objects[i].uPlayer1.qualified = False
