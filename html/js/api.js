@@ -163,7 +163,6 @@ function updateTableSelectAsync() {
             updateTableSelect(u1.id, u2.id);
         } catch (e) {
             console.log("Failed getting data from server. Retrying...");
-            api.getMatchup(u1.id, u2.id);
             api.getAllUserData();
             window.setTimeout(updateTableSelectAsync, 1000);
         }
