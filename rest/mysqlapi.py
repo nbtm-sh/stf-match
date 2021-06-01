@@ -51,7 +51,7 @@ class SQLAPI:
         for i in range(len(usernames)):
             if (i >= 1 & i+1 != len(usernames)):
                 query += " OR "
-            query += "`uName`=" + str(usernames[i])
+            query += "`uName`=\"" + str(usernames[i]) + "\""
         query += ";"
 
         print(query)
