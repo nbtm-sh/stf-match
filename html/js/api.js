@@ -146,6 +146,30 @@ function updateTableSelect(u1, u2) {
     }
 }
 
+function updateTableSelectAsync() {
+    if (api.wait) {
+        window.setTimeout(updateTableSelectAsync, 200);
+    } else {
+        try {
+            console.log(api.users);
+            console.log(api.matches);
+
+            var u1 = api.getUserByUsername(urlParams.get("u1"));
+            var u2 = api.getUserByUsername(urlParams.get("u2"));
+
+            api.getMatchup(u1.id, u2.id);
+            api.getAllUserData();
+
+            updateTableSelect(u1.id, u2.id);
+        } catch (e) {
+            console.log("Failed getting data from server. Retrying...");
+            api.getMatchup(u1.id, u2.id);
+            api.getAllUserData();
+            window.setTimeout(updateTableSelectAsync, 1000);
+        }
+    }
+}
+
 const urlParams = new URLSearchParams(window.location.search);
 
 if (urlParams.get("u1") == null) {
@@ -157,14 +181,6 @@ if (urlParams.get("u1") == null) {
 
     updateTableAll();
 } else {
-    api.getAllUserData();
-    console.log(api.users);
-    console.log(api.matches);
 
-    var u1 = api.getUserByUsername(urlParams.get("u1"));
-    var u2 = api.getUserByUsername(urlParams.get("u2"));
-
-    api.getMatchup(u1.id, u2.id);
-
-    updateTableSelect(u1.id, u2.id);
+    updateTableSelectAsync();
 }
