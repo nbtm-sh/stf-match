@@ -118,7 +118,7 @@ api.getAllMatches();
 console.log(api.users);
 console.log(api.matches);
 
-function updateTable() {
+function updateTableAll() {
     console.log("Update table");
     if (api.wait) {
         window.setTimeout(updateTable, 200);
@@ -126,7 +126,7 @@ function updateTable() {
         try {
             api.getTableData(document.getElementById("resulttable"));
         } catch (e) {
-            console.log("Error");
+            console.log("Failed getting data from server. Retrying...");
             api.getAllUserData();
             api.getAllMatches();
             window.setTimeout(updateTable, 1000);
@@ -134,4 +134,4 @@ function updateTable() {
     }
 }
 
-updateTable();
+updateTableAll();
