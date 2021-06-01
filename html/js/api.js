@@ -10,6 +10,7 @@ class API {
     }
 
     cb_getAllUserData(t, st) {
+        console.log(st);
         t.users = JSON.parse(st);
     }
     ecb_getAllUserData(t, st) {
