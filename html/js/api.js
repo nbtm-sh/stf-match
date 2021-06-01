@@ -79,11 +79,8 @@ class API {
 
     //#region Correct response callback functions
     cb_getAllUserData(st, t) {
-        console.log(st);
         t.users = JSON.parse(st);
         t.wait = false;
-
-        console.log(t.users);
     }
 
     cb_getAllMatches(st, t) {
@@ -95,8 +92,6 @@ class API {
             t.matches[i].uPlayer2 = t.getUserById(t.matches[i].uPlayer2);
             t.matches[i].tResult = t.getUserById(t.matches[i].tResult);
         }
-
-        console.log(t.matches);
 
         t.wait = false;
     }
