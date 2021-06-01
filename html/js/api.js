@@ -120,7 +120,7 @@ console.log(api.matches);
 
 function updateTable() {
     if (api.wait) {
-        window.setTimeout(updateTable, 1000);
+        window.setTimeout(updateTable, 200);
     } else {
         api.getTableData(document.getElementById("resulttable"));
     }
