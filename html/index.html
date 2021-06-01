@@ -31,6 +31,9 @@
         </div>
         <script>
             const urlParams = new URLSearchParams(window.location.search);
+
+            var stats = [];
+
             if (urlParams.get("u1") == null) {
                 var xmlHttp = new XMLHttpRequest();
                 xmlHttp.onreadystatechange = function() { 
@@ -41,7 +44,8 @@
                 xmlHttp.send(null);
             }
 
-            function callback(st) {
+            function callback_stats(st) {
+                stats = JSON.parse(st)
                 console.log(JSON.parse(st));
             }
         </script>
