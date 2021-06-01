@@ -40,7 +40,7 @@ def get_players():
     response_json = [i.json() for i in response]
 
     resp = make_response(jsonify(response_json))
-    resp.headers['Access-Control-Allow-Origin'] = ''
+    resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
 @app.route('/matches')
@@ -75,7 +75,7 @@ def get_matches():
         result = database_interface.get_matchups(players[0], players[1])
     
     resp = make_response(jsonify([i.json() for i in result]))
-    resp.headers['Access-Control-Allow-Origin'] = ''
+    resp.headers['Access-Control-Allow-Origin'] = '*'
 
     return resp
 
