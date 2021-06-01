@@ -154,9 +154,8 @@ function updateTableSelectAsync() {
 const urlParams = new URLSearchParams(window.location.search);
 
 if (urlParams.get("u1") == null) {
-    api.getAllUserData();
     api.getAllMatches();
-    
+
     console.log(api.matches);
 
     updateTableAll();
