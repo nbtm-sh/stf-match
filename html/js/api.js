@@ -107,7 +107,6 @@ function updateTableAll() {
             api.getTableData(document.getElementById("resulttable"));
         } catch (e) {
             console.log("Failed getting data from server. Retrying...");
-            api.getAllUserData();
             api.getAllMatches();
             window.setTimeout(updateTableAll, 1000);
         }
@@ -123,7 +122,6 @@ function updateTableSelect(u1, u2) {
             api.getTableData(document.getElementById("resulttable"));
         } catch (e) {
             console.log("Failed getting data from server. Retrying...");
-            api.getAllUserData();
             api.getMatchup(u1, u2);
             window.setTimeout(updateTableSelect, 1000);
         }
@@ -138,13 +136,13 @@ function updateTableSelectAsync() {
             console.log(api.users);
             console.log(api.matches);
 
-            var u1 = api.getUserByUsername(urlParams.get("u1"));
-            var u2 = api.getUserByUsername(urlParams.get("u2"));
+            var u1 = urlParams.get("u1");
+            var u2 = urlParams.get("u2");
 
-            api.getMatchup(u1.id, u2.id);
+            api.getMatchup(u1, u2);
             api.getAllUserData();
 
-            updateTableSelect(u1.id, u2.id);
+            updateTableSelect(u1, u2);
         } catch (e) {
             console.log("Failed getting data from server. Retrying...");
             api.getAllUserData();
@@ -159,7 +157,6 @@ if (urlParams.get("u1") == null) {
     api.getAllUserData();
     api.getAllMatches();
     
-    console.log(api.users);
     console.log(api.matches);
 
     updateTableAll();
