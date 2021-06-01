@@ -118,6 +118,12 @@ api.getAllMatches();
 console.log(api.users);
 console.log(api.matches);
 
-window.setTimeout(function() {
-    api.getTableData(document.getElementById("resulttable"));
-}, 2000);
+function updateTable() {
+    if (api.wait) {
+        window.setTimeout(updateTable, 1000);
+    } else {
+        api.getTableData(document.getElementById("resulttable"));
+    }
+}
+
+updateTable();
