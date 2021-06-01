@@ -83,6 +83,7 @@ app.get('/player', (req, res, query_callback=null, msql=mysql_connection) => {
             if (send_results) {
                 while (gt.length-1 >= len) {
                     // Wait for all responses
+                    console.log("Waiting for responses");
                 }
                 cb(ext, gt);
             }
