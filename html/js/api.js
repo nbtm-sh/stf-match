@@ -6,7 +6,7 @@ class API {
     }
 
     getAllUserData() {
-        WebRequest.get("http://stf.nbti.net:8080/players", this.cb_getAllUserData, this, error_callback=ecb_getAllUserData);
+        WebRequest.get("http://stf.nbti.net:8080/players", this.cb_getAllUserData, this, error_callback=this.ecb_getAllUserData);
     }
 
     cb_getAllUserData(t, st) {
