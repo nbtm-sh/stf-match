@@ -32,8 +32,8 @@
         <script>
             const urlParams = new URLSearchParams(window.location.search);
 
+            var user_data = [];
             var stats = [];
-            var user_ids = [];
 
             var xmlHttp;
 
@@ -74,9 +74,35 @@
                 console.log(user_ids);
             }
 
+            function get_user_by_id(id) {
+                for (var i = 0; i < user_data.length; i += 1) {
+                    if(user_data[i].id == id) {
+                        return user_data[i];
+                    }
+                }
+            }
+
             function callback_player_data(st) {
-                stats = JSON.parse(st);
+                user_data = JSON.parse(st);
                 console.log(JSON.parse(st));
+
+                for (var i = 0; i < stats.length; i += 1) {
+                    stats[i].uPlayer1 = get_user_by_id(stats[i].uPlayer1);
+                    stats[i].uPlayer2 = get_user_by_id(stats[i].uPlayer2);
+                }
+
+                // Start adding items to the table
+                var html_string = `
+                    <tr>
+                        <th>Player 1</th>
+                        <th>Fighter</th>
+                        <th>Round</th>
+                        <th>Winner</th>
+                        <th>Fighter</th>
+                        <th>Player 2</th>
+                    </tr>
+                `;
+                console.log(stats);
             }
         </script>
     </body>
