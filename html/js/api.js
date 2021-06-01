@@ -13,3 +13,7 @@ class API {
         this.users = JSON.parse(st);
     }
 }
+
+const api = new API();
+
+api.getAllUserData();
