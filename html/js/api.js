@@ -121,7 +121,7 @@ console.log(api.matches);
 function updateTableAll() {
     console.log("Update table");
     if (api.wait) {
-        window.setTimeout(updateTable, 200);
+        window.setTimeout(updateTableAll, 200);
     } else {
         try {
             api.getTableData(document.getElementById("resulttable"));
@@ -129,7 +129,7 @@ function updateTableAll() {
             console.log("Failed getting data from server. Retrying...");
             api.getAllUserData();
             api.getAllMatches();
-            window.setTimeout(updateTable, 1000);
+            window.setTimeout(updateTableAll, 1000);
         }
     }
 }
