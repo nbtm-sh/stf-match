@@ -59,7 +59,7 @@ class API {
                 <tr>
                     <td data="player1" country="${this.matches[i].uPlayer1.uCountry}">${this.matches[i].uPlayer1.uName}</td>
                     <td data="player1Figher">${this.matches[i].uPlayer1Fighter}</td>
-                    <td data="winner"><a href="match?m=${this.matches[i].id}$">${this.matches[i].tResult.uName}</a></td>
+                    <td data="winner"><a href="match?m=${this.matches[i].id}">${this.matches[i].tResult.uName}</a></td>
                     <td data="winner">${this.matches[i].tRound}</td>
                     <td data="player1Figher">${this.matches[i].uPlayer2Fighter}</td>
                     <td data="player1" country="${this.matches[i].uPlayer2.uCountry}">${this.matches[i].uPlayer2.uName}</td>
@@ -140,12 +140,10 @@ function updateTableSelectAsync() {
             var u2 = urlParams.get("u2");
 
             api.getMatchup(u1, u2);
-            api.getAllUserData();
 
             updateTableSelect(u1, u2);
         } catch (e) {
             console.log("Failed getting data from server. Retrying...");
-            api.getAllUserData();
             window.setTimeout(updateTableSelectAsync, 200);
         }
     }
