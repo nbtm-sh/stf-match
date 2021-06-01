@@ -52,11 +52,12 @@ def get_matches():
     players.remove(None)
 
     for i in range(len(players)):
-        try:
-            players[i] = int(players[i])
-            players[i] = database_interface.get_players_by_id(players[i])
-        except ValueError:
-            players[i] = database_interface.get_players_by_username(players[i])
+        if players[i] != None:
+            try:
+                players[i] = int(players[i])
+                players[i] = database_interface.get_players_by_id(players[i])
+            except ValueError:
+                players[i] = database_interface.get_players_by_username(players[i])
     
     if len(players) == 0:
         result = database_interface.get_all_matches()
