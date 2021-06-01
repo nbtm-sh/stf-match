@@ -36,6 +36,8 @@ function send_players(client_res, gt) {
         });
     }
 
+    client_res.header("Access-Control-Allow-Origin: *");
+
     console.log(res_json);
 
     client_res.json(res_json);
@@ -61,6 +63,7 @@ function send_matches(results, client_res) {
     }
 
     console.log(res_json[0]);
+    client_res.header("Access-Control-Allow-Origin: *");
 
     client_res.json(res_json)
 }
