@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import jsonify
+from flask import jsonify, make_response
 from flask import request
 import mysqlapi
 import json
@@ -39,7 +39,9 @@ def get_players():
 
     response_json = [i.json() for i in response]
 
-    return jsonify(response_json)
+    resp = make_response(jsonify(response_json))
+    resp.headers['Access-Control-Allow-Origin'] = ''
+    return resp
 
 @app.route('/matches')
 def get_matches():
@@ -72,7 +74,10 @@ def get_matches():
     elif len(players) == 2:
         result = database_interface.get_matchups(players[0], players[1])
     
-    return jsonify([i.json() for i in result])
+    resp = make_response(jsonify([i.json() for i in result]))
+    resp.headers['Access-Control-Allow-Origin'] = ''
+
+    return resp
 
     
 
