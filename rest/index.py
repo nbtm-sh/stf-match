@@ -49,7 +49,10 @@ def get_matches():
     result = []
 
     players = [player1, player2]
-    players.remove(None)
+    try:
+        players.remove(None)
+    except Exception:
+        pass
 
     for i in range(len(players)):
         if players[i] != None:
