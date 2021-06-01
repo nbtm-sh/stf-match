@@ -2,8 +2,6 @@ var creds = require("./mysql-creds.json");
 var msql = require("mysql");
 
 class SQL {
-    sql_connection = "";
-
     temp_response = "";
     temp_wait = "";
 
