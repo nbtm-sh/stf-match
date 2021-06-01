@@ -58,9 +58,9 @@ def get_matches():
         if players[i] != None:
             try:
                 players[i] = int(players[i])
-                players[i] = database_interface.get_players_by_id(players[i])
+                players[i] = database_interface.get_players_by_id(players[i])[0]
             except ValueError:
-                players[i] = database_interface.get_players_by_username(players[i])
+                players[i] = database_interface.get_players_by_username(players[i])[0]
     
     print(players)
 
