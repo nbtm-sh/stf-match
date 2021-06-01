@@ -158,6 +158,8 @@ if (urlParams.get("u1") == null) {
     updateTableAll();
 } else {
     api.getAllUserData();
+    console.log(api.users);
+    console.log(api.matches);
 
     var u1 = api.getUserByUsername(urlParams.get("u1"));
     var u2 = api.getUserByUsername(urlParams.get("u2"));
