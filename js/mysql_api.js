@@ -36,9 +36,11 @@ class SQL {
             if (result == null) {
                 // No results
                 t.temp_response = [];
+                console.log("No results");
                 t.wait = false;
             } else {
                 t.temp_response = this.constructUserObjects(result);
+                console.log("Results");
                 t.wait = false;
             }
         });
