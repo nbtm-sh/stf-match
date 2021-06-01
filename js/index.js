@@ -98,7 +98,25 @@ app.get('/player', (req, res, query_callback=null, msql=mysql_connection) => {
             }
         });
     }
-})
+});
+
+app.get('/players', (req, res, query_callback=null, msql=mysql_connection) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+
+    msql.query(`SELECT * FROM \`players\`;`, (err, result, fields, ret=res) => {
+        ret_json = [];
+
+        for (var i = 0; i < result.length; i += 1) {
+            ret_json.push({
+                id: result[i].id,
+                uName: result[i].uName,
+                uCountry: result[i].uCountry
+            });
+        }
+
+        res.json(ret_json);
+    });
+});
 
 app.get('/all', (req, res, query_callback=query_db, msql=mysql_connection) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
