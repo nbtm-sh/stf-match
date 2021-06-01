@@ -32,8 +32,8 @@ def get_players():
     
     response = []
 
-    response.extend(database_interface.get_players_by_username(uname))
-    response.extend(database_interface.get_players_by_id(uid))
+    if uname != None: response.extend(database_interface.get_players_by_username(uname))
+    if uid != None: response.extend(database_interface.get_players_by_id(uid))
 
     response_json = [i.json for i in response]
 
