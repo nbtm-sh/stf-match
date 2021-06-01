@@ -13,8 +13,8 @@ class Match:
     def json(self):
         return {
             "id": self.id,
-            "uPlayer1": self.uPlayer1.id,
-            "uPlayer2": self.uPlayer2.id,
+            "uPlayer1": self.uPlayer1.json(),
+            "uPlayer2": self.uPlayer2.json(),
             "uPlayer1Fighter": self.uPlayer1Fighter,
             "uPlayer2Fighter": self.uPlayer2Fighter,
 
