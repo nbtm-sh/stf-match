@@ -14,7 +14,7 @@ CREATE TABLE `players` (    -- Usernames and such
 );
 
 CREATE TABLE `matches` (
-    id NOT NULL,
+    id INT NOT NULL,
     tTournament INT,
     tRound INT,
     tRoundGroup INT,
