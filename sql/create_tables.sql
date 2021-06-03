@@ -26,7 +26,7 @@ CREATE TABLE `matches` (
     uPlayer1 INT,
     uPlayer2 INT,
 
-    CONSTRAINT `fk_tournament_id`
+    CONSTRAINT `fk_tournament_id_match`
         FOREIGN KEY (tTournament) REFERENCES tournaments (id)
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
@@ -54,10 +54,10 @@ CREATE TABLE `individualMatches` ( -- Actual match results
     CONSTRAINT `fk_match_id`
         FOREIGN KEY (tMatch) REFERENCES matches (id)
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON DELETE CASCADE,
     
-    CONSTRAINT `fk_tournament_id`
+    CONSTRAINT `fk_tournament_id_invm`
         FOREIGN KEY (tTournament) REFERENCES tournaments (id)
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON DELETE CASCADE
 );
