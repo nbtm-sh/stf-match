@@ -13,7 +13,7 @@ CREATE TABLE `players` (    -- Usernames and such
     uTeam TEXT
 );
 
-CREATE TABLE `matches` (  -- Match groups that contain matches
+CREATE TABLE `matches` (       -- Match groups that contain matches
     id NOT NULL,
     tTournament INT,
     tRound INT,
