@@ -2,19 +2,19 @@ USE `stf`;
 
 CREATE TABLE `tournaments` (        -- Tournaments
     id INT PRIMARY KEY,
-    tName TEXT NOT NULL,
-    tLocation TEXT NOT NULL
+    tName TEXT,
+    tLocation TEXT
 );
 
 CREATE TABLE `players` (    -- Usernames and such
-    id INT,
-    uName TEXT NOT NULL,
-    uCountry TEXT NOT NULL,
+    id INT PRIMARY KEY,
+    uName TEXT,
+    uCountry TEXT,
     uTeam TEXT
 );
 
 CREATE TABLE `matches` (
-    id INT,
+    id INT PRIMARY KEY,
     tTournament INT,
     tRound INT,
     tRoundGroup INT,
@@ -43,7 +43,7 @@ CREATE TABLE `matches` (
 );
 
 CREATE TABLE `individualMatches` ( -- Actual match results
-    id INT AUTO_INCREMENT,
+    id INT PRIMARY KEY,
     uPlayer1Fighter TEXT,
     uPlayer2Fighter TEXT,
     tDate DATETIME,
