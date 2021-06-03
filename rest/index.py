@@ -79,7 +79,5 @@ def get_matches():
 
     return resp
 
-    
-
 if __name__ == "__main__":
     app.run("stf.nbti.net", 8080)
