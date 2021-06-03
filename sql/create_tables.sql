@@ -24,7 +24,7 @@ CREATE TABLE `users` (
     id INT PRIMARY KEY,
     uName TEXT,
     uPasswd TEXT,
-    uRole TEXT,
+    uRole VARCHAR(16),
     uLinkedPlayer INT,
 
     CONSTRAINT `fk_linked_player`
