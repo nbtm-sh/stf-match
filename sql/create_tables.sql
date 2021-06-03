@@ -26,7 +26,7 @@ CREATE TABLE `matches` (
 );
 
 CREATE TABLE `individualMatches` ( -- Actual match results
-    id INT NOT NULL AUTO_INREMENT,
+    id INT NOT NULL AUTO_INCREMENT,
     uPlayer1 INT,
     uPlayer2 INT,
     uPlayer1Fighter TEXT,
