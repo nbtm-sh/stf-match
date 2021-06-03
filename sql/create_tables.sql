@@ -39,7 +39,7 @@ CREATE TABLE `individualMatches` ( -- Actual match results
     CONSTRAINT `fk_match_id`
         FOREIGN KEY (tMatch) REFERENCES matches(id)
         ON UPDATE NO ACTION
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
     
     CONSTRAINT `fk_tournament_id`
         FOREIGN KEY (tTournament) REFERENCES tournaments(id)
