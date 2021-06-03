@@ -14,7 +14,7 @@ CREATE TABLE `players` (    -- Usernames and such
 );
 
 CREATE TABLE `roles` (
-    id TEXT PRIMARY KEY,
+    id VARCHAR(16) PRIMARY KEY,
     pManageTournament BIT,
     pManagePlayerLinks BIT,
     pManageDatabase BIT
