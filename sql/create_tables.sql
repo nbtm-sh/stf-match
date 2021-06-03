@@ -1,20 +1,20 @@
 USE `stf`;
 
 CREATE TABLE `tournaments` (        -- Tournaments
-    id INT NOT NULL PRIMARY KEY,
+    id INT PRIMARY KEY,
     tName TEXT NOT NULL,
     tLocation TEXT NOT NULL
 );
 
 CREATE TABLE `players` (    -- Usernames and such
-    id INT NOT NULL,
+    id INT,
     uName TEXT NOT NULL,
     uCountry TEXT NOT NULL,
     uTeam TEXT
 );
 
 CREATE TABLE `matches` (
-    id INT NOT NULL,
+    id INT,
     tTournament INT,
     tRound INT,
     tRoundGroup INT,
@@ -43,7 +43,7 @@ CREATE TABLE `matches` (
 );
 
 CREATE TABLE `individualMatches` ( -- Actual match results
-    id INT NOT NULL AUTO_INCREMENT,
+    id INT AUTO_INCREMENT,
     uPlayer1Fighter TEXT,
     uPlayer2Fighter TEXT,
     tDate DATETIME,
