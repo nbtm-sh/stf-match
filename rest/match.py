@@ -22,3 +22,12 @@ class Match:
             "tRound": self.tRound,
             "tResult": self.tResult.json()
         }
+    
+class Fight:
+    def __init__(self, id=None, uPlayer1=None, uPlayer2=None, uPlayer1Fighter=None, uPlayer2Fighter=None):
+        self.id = id
+        self.uPlayer1 = uPlayer1
+        self.uPlayer2 = uPlayer2
+        self.uPlayer1Fighter = uPlayer1Fighter
+        self.uPlayer2Fighter = uPlayer2Fighter
+        

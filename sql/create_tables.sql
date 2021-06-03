@@ -75,6 +75,7 @@ CREATE TABLE `individualMatches` ( -- Actual match results
     tTournament INT,
     tMatch INT,
     tSeq INT,
+    tWinner INT,
 
     CONSTRAINT `fk_match_id`
         FOREIGN KEY (tMatch) REFERENCES matches (id)
