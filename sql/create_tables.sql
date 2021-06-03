@@ -13,6 +13,31 @@ CREATE TABLE `players` (    -- Usernames and such
     uTeam TEXT
 );
 
+CREATE TABLE `roles` (
+    id TEXT PRIMARY KEY,
+    pManageTournament BIT,
+    pManagePlayerLinks BIT,
+    pManageDatabase BIT
+);
+
+CREATE TABLE `users` (
+    id INT PRIMARY KEY,
+    uName TEXT,
+    uPasswd TEXT,
+    uRole TEXT,
+    uLinkedPlayer INT,
+
+    CONSTRAINT `fk_linked_player`
+        FOREIGN KEY (uLinkedPlayer) REFERENCES players (id)
+        ON UPDATE NO ACTION
+        ON DELETE SET NULL,
+    
+    CONSTRAINT `fk_roles`
+        FOREIGN KEY (uRole) REFERENCES roles (id)
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+);
+
 CREATE TABLE `matches` (
     id INT PRIMARY KEY,
     tTournament INT,
