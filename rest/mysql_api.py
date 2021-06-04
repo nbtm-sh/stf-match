@@ -22,7 +22,7 @@ class SQLAPI:
             print(i)
             result_object.id = i[0]
             result_object.uName = i[1]
-            result_object.uCountry = [2]
+            result_object.uCountry = i[2]
             result_object.qualified = (result_object.id > 0)
         
         return result_object
