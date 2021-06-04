@@ -1,9 +1,10 @@
 class Match:
-    def __init__(self, id=None, uPlayer1=None, uPlayer2=None, uPlayer1Fighter=None, uPlayer2Fighter=None, tDate=None, tRound=None, tResult=None, tRoundNick=None):
+    def __init__(self, id=None, uPlayer1=None, uPlayer2=None, tDate=None, tRound=None, tResult=None, tRoundNick=None, tWeight=None):
         self.id = id
         self.uPlayer1 = uPlayer1
         self.uPlayer2 = uPlayer2
-        self.rounds = []
+        self.tRounds = []
+        self.tWeight = tWeight
 
         self.tDate = tDate
         self.tRound = tRound
@@ -20,7 +21,7 @@ class Match:
         p1_win_count = 0
         p2_win_count = 0
 
-        for i in self.rounds:
+        for i in self.tRounds:
             p1_win_count += int(i.tWinner.id == self.uPlayer1.id)
             p2_win_count += int(i.tWinner.id == self.uPlayer2.id)
         
@@ -32,22 +33,48 @@ class Match:
             "id": self.id,
             "uPlayer1": self.uPlayer1.json(),
             "uPlayer2": self.uPlayer2.json(),
-            "uPlayer1Fighter": self.uPlayer1Fighter,
-            "uPlayer2Fighter": self.uPlayer2Fighter,
 
             "tDate": self.tDate.strftime('%Y-%m-%d %H:%M:%S'),
             "tRound": self.tRound,
-            "tResult": self.tResult.json()
+            "tRounds": [i.json() for i in self.tRounds]
         }
     
+    def add_fight(self, id, uPlayer1Fighter, uPlayer2Fighter, tMatchTime : int, tWinner : int, tSeq : int):
+        append_object = Fight(
+            id = id,
+            uPlayer1 = self.uPlayer1,
+            uPlayer2 = self.uPlayer2,
+            uPlayer1Fighter = uPlayer1Fighter,
+            uPlayer2Fighter = uPlayer2Fighter,
+            tWinner = tWinner,
+            tMatchTime = tMatchTime,
+            tSeq = tSeq
+        )
+        
+        self.tRounds.append(append_object)
+
+class Tournament:
+    def __init__(self, id=None, tName=None, tLocation=None):
+        self.id = id
+        self.tName = tName
+        self.tLocation = tLocation
+    
+    def json(self):
+        return {
+            "id": self.id,
+            "tName": self.tName,
+            "tLocation": self.tLocation
+        }
+
 class Fight:
-    def __init__(self, id=None, uPlayer1=None, uPlayer2=None, uPlayer1Fighter=None, uPlayer2Fighter=None, tWinner=None, tSeq=None):
+    def __init__(self, id=None, uPlayer1=None, uPlayer2=None, uPlayer1Fighter=None, uPlayer2Fighter=None, tWinner=None, tSeq=None, tMatchTime=None):
         self.id = id
         self.uPlayer1 = uPlayer1
         self.uPlayer2 = uPlayer2
         self.uPlayer1Fighter = uPlayer1Fighter
         self.uPlayer2Fighter = uPlayer2Fighter
         self.tSeq = tSeq
+        self.tMatchTime = tMatchTime
         self.tWinner = self.uPlayer1 if tWinner == 1 else self.uPlayer2
 
     def json(self):
@@ -56,5 +83,8 @@ class Fight:
             "uPlayer1": self.uPlayer1.json(),
             "uPlayer2": self.uPlayer2.json(),
             "tSeq": self.tSeq,
-            
+            "tMatchTime": self.tMatchTime,
+            "uPlayer1Fighter": self.uPlayer1Fighter,
+            "uPlayer2Fighter": self.uPlayer2Fighter,
+            "tWinner": self.tWinner.json()
         }

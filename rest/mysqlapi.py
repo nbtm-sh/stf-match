@@ -119,7 +119,7 @@ class SQLAPI:
         append_values = []
 
         if username != None:
-            append_data.append("`uName`")
+            append_data.append("`uName`")rounds
             append_values.append("\"" + username + "\"")
         if country != None:
             append_data.append("`uCountry`")
