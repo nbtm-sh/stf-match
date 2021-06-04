@@ -19,6 +19,7 @@ class SQLAPI:
         result_object = Player()
 
         for i in data:
+            print(i)
             result_object.id = i[0]
             result_object.uname = i[1]
             result_object.uCountry = [2]
