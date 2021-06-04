@@ -85,7 +85,7 @@ class SQLAPI:
         return SQLAPI.parse_player(results)
     
     def get_player_by_username(self, username):
-        query = f"SELECT * FROM `players` WHERE `uName`={username};"
+        query = f"SELECT * FROM `players` WHERE `uName`=\"{username}\";"
 
         cursor = self.database_connection.cursor()
         cursor.execute(query)
