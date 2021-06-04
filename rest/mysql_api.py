@@ -22,7 +22,7 @@ class SQLAPI:
             result_object.id = i[0]
             result_object.uname = i[1]
             result_object.uCountry = [2]
-            result_object.qualified = (id > 0)
+            result_object.qualified = (result_object.id > 0)
         
         return result_object
 
@@ -74,8 +74,8 @@ class SQLAPI:
         results = cursor.fetchall()
         return self.parse_tournament(results)
 
-    def get_player_by_id(self, id):
-        query = f"SELECT * FROM `players` WHERE `id`={str(abs(id))};"
+    def get_player_by_id(self, _id):
+        query = f"SELECT * FROM `players` WHERE `id`={str(abs(_id))};"
 
         cursor = self.database_connection.cursor()
         cursor.execute(query)
