@@ -21,7 +21,7 @@ class SQLAPI:
         for i in data:
             print(i)
             result_object.id = i[0]
-            result_object.uname = i[1]
+            result_object.uName = i[1]
             result_object.uCountry = [2]
             result_object.qualified = (result_object.id > 0)
         
