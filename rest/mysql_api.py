@@ -19,7 +19,6 @@ class SQLAPI:
         result_object = Player()
 
         for i in data:
-            print(i)
             result_object.id = i[0]
             result_object.uName = i[1]
             result_object.uCountry = i[2]
@@ -27,19 +26,22 @@ class SQLAPI:
         
         return result_object
 
-    def parse_fight(self, data):
-        result_object = Fight()
+    def parse_fights(self, data):
+        result_object = []
 
         for i in data:
-            result_object.id = i[0]
-            result_object.uPlayer1Fighter = self.get_player_by_id(i[1])
-            result_object.uPlayer2Fighter = self.get_player_by_id(i[2])
-            result_object.uPlayer1 = self.get_match_players(i[5])[0]
-            result_object.uPlayer2 = self.get_match_players(i[5])[1]
-            result_object.tSeq = i[6]
-            result_object.tWinner = result_object.uPlayer1 if i[7] == 1 else result_object.uPlayer2
+            new_obj = Fight()
+            new_obj.id = i[0]
+            new_obj.uPlayer1Fighter = self.get_player_by_id(i[1])
+            new_obj.uPlayer2Fighter = self.get_player_by_id(i[2])
+            new_obj.uPlayer1 = self.get_match_players(i[5])[0]
+            new_obj.uPlayer2 = self.get_match_players(i[5])[1]
+            new_obj.tSeq = i[6]
+            new_obj.tWinner = new_obj.uPlayer1 if i[7] == 1 else new_obj.uPlayer2
 
+            result_object.append(new_obj)
         
+        result_object.sort(key=lambda x: x.tSeq, reverse=False)
         return result_object
 
     def parse_tournament(self, data):
@@ -100,11 +102,15 @@ class SQLAPI:
         cursor.execute(query)
 
         results = cursor.fetchall()
-
+        return self.parse_fight(results)
     
-    def get_all_matches(self):
-        query = "SELECT * FROM `matches`"
-        match_object = []
+    def get_fights_by_match(self, match_id):
+        query = f"SELECT * FROM `individualMatches` WHERE `tMatch`={str(match_id)}"
+
+
+    def get_match_by_id(self, match_id):
+        query = f"SELECT * FROM `matches` WHERE `id`={str(match_id)};"
+
     
     def get_match_players(self, match_id):
         query = f"SELECT uPlayer1, uPlayer2 FROM `matches` WHERE `id`={str(match_id)};"
