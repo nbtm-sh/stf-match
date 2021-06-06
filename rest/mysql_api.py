@@ -31,7 +31,7 @@ class SQLAPI:
 
         for i in data:
             result_object.id = i[0]
-            result_object.tTournament = i[1]
+            result_object.tTournament = self.get_tournament(i[1])
             result_object.tRound = i[2]
             result_object.tRoundNick = i[4]
             result_object.tFirstTo = i[5]
