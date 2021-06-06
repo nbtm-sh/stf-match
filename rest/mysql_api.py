@@ -159,16 +159,6 @@ class SQLAPI:
     
     def get_fights_by_match(self, match_id):
         query = f"SELECT * FROM `individualMatches` WHERE `tMatch`={str(match_id)}"
-
-
-    def get_match_by_id(self, match_id):
-        query = f"SELECT * FROM `matches` WHERE `id`={str(match_id)};"
-
-        cursor = self.database_connection.cursor()
-        cursor.execute(query)
-
-        results = cursor.fetchall()
-
     
     def get_match_players(self, match_id):
         query = f"SELECT uPlayer1, uPlayer2 FROM `matches` WHERE `id`={str(match_id)};"
