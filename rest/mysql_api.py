@@ -33,6 +33,8 @@ class SQLAPI:
             result_object.id = i[0]
             result_object.tTournament = i[1]
             result_object.tRound = i[2]
+            result_object.tRoundNick = i[4]
+            #result_object.
 
     def parse_fights(self, data):
         result_object = []
@@ -59,8 +61,31 @@ class SQLAPI:
             result_object.id = i[0]
             result_object.tName = i[1]
             result_object.tLocation = i[2]
+            result_object.uParticipants = self.get_tournament_participants(result_object)
         
         return result_object
+    
+    def get_tournament_participants(self, tournament : Tournament):
+        t_id = tournament.id
+        query = f"SELECT * FROM `matches` WHERE tId={str(t_id)};"
+
+        cursor = self.database_connection.cursor()
+        cursor.execute(query)
+
+        results = cursor.fetchall()
+
+        # Collect user IDs
+        user_ids = []
+
+        for i in results:
+            if i[0] not in user_ids:
+                user_ids.append(i[0])
+        
+        users = []
+        for i in user_ids:
+            users.append(self.get_player_by_id(i))
+        
+        return users
 
     def get_all_tournaments(self):
         query = "SELECT * FROM `tournaments`;"

@@ -6,6 +6,7 @@ class Match:
         self.tRounds = []
         self.tWeight = tWeight
         self.tTournament = tTournament
+        self.tRound
 
         self.tDate = tDate
         self.tRound = tRound
@@ -55,10 +56,11 @@ class Match:
         self.tRounds.append(append_object)
 
 class Tournament:
-    def __init__(self, id=None, tName=None, tLocation=None):
+    def __init__(self, id=None, tName=None, tLocation=None, uParticipants=None):
         self.id = id
         self.tName = tName
         self.tLocation = tLocation
+        self.uParticipants = uParticipants
     
     def json(self):
         return {
