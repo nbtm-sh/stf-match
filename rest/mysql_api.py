@@ -25,6 +25,14 @@ class SQLAPI:
             result_object.qualified = (result_object.id > 0)
         
         return result_object
+    
+    def parse_match(self, data):
+        result_object = Match()
+
+        for i in data:
+            result_object.id = i[0]
+            result_object.tTournament = i[1]
+            result_object.tRound = i[2]
 
     def parse_fights(self, data):
         result_object = []
@@ -110,6 +118,11 @@ class SQLAPI:
 
     def get_match_by_id(self, match_id):
         query = f"SELECT * FROM `matches` WHERE `id`={str(match_id)};"
+
+        cursor = self.database_connection.cursor()
+        cursor.execute(query)
+
+        results = cursor.fetchall()
 
     
     def get_match_players(self, match_id):
