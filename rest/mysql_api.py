@@ -73,7 +73,7 @@ class SQLAPI:
             result_object.tName = i[1]
             result_object.tLocation = i[2]
             result_object.uParticipants = self.get_tournament_participants(result_object)
-            result_object.tMatches = self.get_matches_by_tournament(result_object) if True else None
+            result_object.tMatches = self.get_matches_by_tournament(result_object) if not exclude_matches else None
         
         return result_object
     
