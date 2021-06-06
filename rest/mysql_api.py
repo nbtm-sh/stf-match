@@ -52,8 +52,8 @@ class SQLAPI:
         for i in data:
             new_obj = Fight()
             new_obj.id = i[0]
-            new_obj.uPlayer1Fighter = self.get_player_by_id(i[1])
-            new_obj.uPlayer2Fighter = self.get_player_by_id(i[2])
+            new_obj.uPlayer1Fighter = i[1]
+            new_obj.uPlayer2Fighter = i[2]
             new_obj.uPlayer1 = self.get_match_players(i[5])[0]
             new_obj.uPlayer2 = self.get_match_players(i[5])[1]
             new_obj.tSeq = i[6]
