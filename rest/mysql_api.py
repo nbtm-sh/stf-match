@@ -67,7 +67,7 @@ class SQLAPI:
     
     def get_tournament_participants(self, tournament : Tournament):
         t_id = tournament.id
-        query = f"SELECT * FROM `matches` WHERE tId={str(t_id)};"
+        query = f"SELECT * FROM `matches` WHERE `tTournament`={str(t_id)};"
 
         cursor = self.database_connection.cursor()
         cursor.execute(query)
