@@ -26,12 +26,12 @@ class SQLAPI:
         
         return result_object
     
-    def parse_match(self, data):
+    def parse_match(self, data, exclude_tournament=False):
         result_object = Match()
 
         for i in data:
             result_object.id = i[0]
-            result_object.tTournament = self.get_tournament(i[1])
+            result_object.tTournament = self.get_tournament_by_id(i[1], exclude_matches=True)
             result_object.tRound = i[2]
             result_object.tRoundNick = i[4]
             result_object.tFirstTo = i[5]
@@ -64,7 +64,7 @@ class SQLAPI:
         result_object.sort(key=lambda x: x.tSeq, reverse=False)
         return result_object
 
-    def parse_tournament(self, data):
+    def parse_tournament(self, data, exculde_matches=False):
         result_object = Tournament()
 
         for i in data:
@@ -72,6 +72,7 @@ class SQLAPI:
             result_object.tName = i[1]
             result_object.tLocation = i[2]
             result_object.uParticipants = self.get_tournament_participants(result_object)
+
         
         return result_object
     
@@ -99,6 +100,20 @@ class SQLAPI:
         
         return users
 
+    def get_matches_by_tournament(self, tournament : Tournament):
+        query = f"SELECT * FROM `matches` WHERE `tTournament`={tournament.id};"
+
+        cursor = self.database_connection.cursor()
+        cursor.execute(query)
+
+        results = cursor.fetchall()
+
+        return_data = []
+        for i in results:
+            return_data.append(self.parse_match(i, exclude_tournament=True))
+        
+        return return_data
+
     def get_all_tournaments(self):
         query = "SELECT * FROM `tournaments`;"
 
@@ -113,14 +128,14 @@ class SQLAPI:
         
         return return_data
 
-    def get_tournament(self, tournament_id):
+    def get_tournament_by_id(self, tournament_id, exclude_matches=False):
         query = f"SELECT * FROM `tournaments` WHERE `id`={str(tournament_id)};"
 
         cursor = self.database_connection.cursor()
         cursor.execute(query)
 
         results = cursor.fetchall()
-        return self.parse_tournament(results)
+        return self.parse_tournament(results, exclude_matches)
 
     def get_player_by_id(self, _id):
         query = f"SELECT * FROM `players` WHERE `id`={str(abs(_id))};"
@@ -147,7 +162,7 @@ class SQLAPI:
         cursor.execute(query)
 
         results = cursor.fetchall()
-        return self.parse_fight(results)
+        return self.parse_fights(results)
     
     def get_match_by_id(self, match_id):
         query = f"SELECT * FROM `matches` WHERE `id`={str(match_id)};"
@@ -176,3 +191,16 @@ class SQLAPI:
         results = cursor.fetchall()[0]
 
         return [self.get_player_by_id(results[0]), self.get_player_by_id(results[1])]
+    
+    def get_match_by_players(self, player1, player2):
+        query = f"SELECT * FROM `matches` WHERE (`uPlayer1`={player1.id} OR `uPlayer2`={player1.id}) AND (`uPlayer1`={player2.id} or `uPlayer2`={player2.id});"
+
+        cursor = self.database_connection.cursor()
+        cursor.execute(query)
+
+        results = cursor.fetchall()
+        return_data = []
+        for i in results:
+            return_data.append(self.parse_match(i, exclude_tournament=True))
+        
+        return return_data

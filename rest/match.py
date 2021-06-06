@@ -65,6 +65,7 @@ class Tournament:
         self.tName = tName
         self.tLocation = tLocation
         self.uParticipants = uParticipants
+        self.tMatches = []
     
     def json(self):
         return {
