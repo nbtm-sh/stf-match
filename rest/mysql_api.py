@@ -30,6 +30,7 @@ class SQLAPI:
         result_object = Match()
 
         for i in data:
+            print(i)
             result_object.id = i[0]
             result_object.tTournament = self.get_tournament_by_id(i[1], exclude_matches=True)
             result_object.tRound = i[2]
