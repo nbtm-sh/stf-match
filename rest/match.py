@@ -72,8 +72,7 @@ class Tournament:
             "id": self.id,
             "tName": self.tName,
             "tLocation": self.tLocation,
-            "tMatches": [i.json() for i in self.tMatches] if self.tMatches != None else None,
-            "uParticipants": [i.json() for i in self.uParticipants] if self.tMatches != None else None
+            "tMatches": [i.json() for i in self.tMatches] if self.tMatches != None else None
         }
 
 class Fight:
