@@ -32,7 +32,7 @@ class SQLAPI:
         for i in data:
             print(i)
             result_object.id = i[0]
-            result_object.tTournament = self.get_tournament_by_id(i[1], exclude_matches=True)
+            result_object.tTournament = self.get_tournament_by_id(i[1], exclude_matches=True) if not exclude_tournament else None
             result_object.tRound = i[2]
             result_object.tRoundNick = i[4]
             result_object.tFirstTo = i[5]
