@@ -15,5 +15,12 @@ database_interface = mysql_api.SQLAPI(
 
 app = Flask(__name__)
 
+@app.route('/tournaments')
+def all_tournaments():
+    result = database_interface.get_all_tournaments()
+    result = [i.json() for i in result]
+
+    return jsonify(result)
+
 if __name__ == "__main__":
     app.run("127.0.0.1", 8080)
