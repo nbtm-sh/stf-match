@@ -78,8 +78,10 @@ class SQLAPI:
         user_ids = []
 
         for i in results:
-            if i[0] not in user_ids:
-                user_ids.append(i[0])
+            if i[9] not in user_ids:
+                user_ids.append(i[9])
+            if i[10] not in user_ids:
+                user_ids.append(i[10])
         
         users = []
         for i in user_ids:
