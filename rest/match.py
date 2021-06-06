@@ -38,7 +38,7 @@ class Match:
             "uPlayer1": self.uPlayer1.json(),
             "uPlayer2": self.uPlayer2.json(),
 
-            "tDate": self.tDate.strftime('%Y-%m-%d %H:%M:%S'),
+            "tDate": if self.tDate != None self.tDate.strftime('%Y-%m-%d %H:%M:%S') else None,
             "tRound": self.tRound,
             "tRounds": [i.json() for i in self.tRounds]
         }
