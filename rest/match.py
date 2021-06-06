@@ -37,9 +37,11 @@ class Match:
             "id": self.id,
             "uPlayer1": self.uPlayer1.json(),
             "uPlayer2": self.uPlayer2.json(),
+            "tWeight": self.tWeight,
 
             "tDate": self.tDate.strftime('%Y-%m-%d %H:%M:%S') if self.tDate != None  else None,
             "tRound": self.tRound,
+            "tRoundNick": self.tRoundNick,
             "tRounds": [i.json() for i in self.tRounds]
         }
     
