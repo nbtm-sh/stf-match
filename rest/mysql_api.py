@@ -34,7 +34,16 @@ class SQLAPI:
             result_object.tTournament = i[1]
             result_object.tRound = i[2]
             result_object.tRoundNick = i[4]
-            #result_object.
+            result_object.tFirstTo = i[5]
+            result_object.uPlatform = i[6]
+            result_object.tMatchType = i[7]
+            result_object.tWeight = i[8]
+            result_object.uPlayer1 = self.get_player_by_id(i[9])
+            result_object.uPlayer2 = self.get_player_by_id(i[10])
+        
+            # Collect rounds
+        
+        return result_object
 
     def parse_fights(self, data):
         result_object = []

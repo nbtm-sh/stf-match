@@ -1,12 +1,14 @@
 class Match:
-    def __init__(self, id=None, uPlayer1=None, uPlayer2=None, tDate=None, tRound=None, tResult=None, tRoundNick=None, tWeight=None, tTournament=None):
+    def __init__(self, id=None, uPlayer1=None, uPlayer2=None, tDate=None, tRound=None, tResult=None, tRoundNick=None, tWeight=None, tTournament=None, tRoundGroup=None):
         self.id = id
         self.uPlayer1 = uPlayer1
         self.uPlayer2 = uPlayer2
         self.tRounds = []
         self.tWeight = tWeight
         self.tTournament = tTournament
-        self.tRound
+        self.tFirstTo = None
+        self.uPlatform = None
+        self.tMatchType = None
 
         self.tDate = tDate
         self.tRound = tRound
