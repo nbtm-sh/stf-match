@@ -1,7 +1,7 @@
 class API {
     users = [];
     matches = [];
-    domain = "stf.nbti.net:8080"
+    domain = "stf.nbti.net/api"
     wait = false;
 
     constructor() {
@@ -10,12 +10,12 @@ class API {
 
     //#region   API method calls
     getAllMatches() {
-        WebRequest.get(`http://${this.domain}/matches`, this.cb_getAllMatches, this, this.ecb_getAllMatches);
+        WebRequest.get(`https://${this.domain}/matches`, this.cb_getAllMatches, this, this.ecb_getAllMatches);
         this.wait = true;
     }
 
     getMatchup(u1, u2) {
-        WebRequest.get(`http://${this.domain}/matches?u1=${u1}&u2=${u2}`, this.cb_getAllMatches, this, this.ecb_getAllMatches);
+        WebRequest.get(`https://${this.domain}/matches?u1=${u1}&u2=${u2}`, this.cb_getAllMatches, this, this.ecb_getAllMatches);
         this.wait = true;
     }
     //#endregion
