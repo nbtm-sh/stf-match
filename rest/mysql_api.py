@@ -64,7 +64,7 @@ class SQLAPI:
         result_object.sort(key=lambda x: x.tSeq, reverse=False)
         return result_object
 
-    def parse_tournament(self, data, exculde_matches=False):
+    def parse_tournament(self, data, exclude_matches=False):
         result_object = Tournament()
 
         for i in data:
