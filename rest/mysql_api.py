@@ -112,7 +112,7 @@ class SQLAPI:
         return_data = []
         for i in results:
             print("get_matches_by_tournament: i: ", i)
-            return_data.append(self.parse_match(i, exclude_tournament=True))
+            return_data.append(self.parse_match([i], exclude_tournament=True))
         
         return return_data
 
