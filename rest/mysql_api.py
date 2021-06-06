@@ -40,6 +40,7 @@ class SQLAPI:
             result_object.tWeight = i[8]
             result_object.uPlayer1 = self.get_player_by_id(i[9])
             result_object.uPlayer2 = self.get_player_by_id(i[10])
+            result_object.tRounds = self.get_fights_by_match(i[0])
         
             # Collect rounds
         
@@ -159,6 +160,12 @@ class SQLAPI:
     
     def get_fights_by_match(self, match_id):
         query = f"SELECT * FROM `individualMatches` WHERE `tMatch`={str(match_id)}"
+
+        cursor = self.database_connection.cursor()
+        cursor.execute(query)
+
+        results = cursor.fetchall()
+        return self.parse_fights(results)
     
     def get_match_players(self, match_id):
         query = f"SELECT uPlayer1, uPlayer2 FROM `matches` WHERE `id`={str(match_id)};"
