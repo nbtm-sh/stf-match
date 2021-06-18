@@ -2,10 +2,55 @@
     <head>
         <title>STF Demo Site</title>
     </head>
-    <link href="style/v2_body.css" rel="stylesheet" type="text/css">
+    <link href="style/v2_body.css" rel="stylesheet" type="text/css"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"> 
     <body>
+        <div class="error_message">
+            <div class="error_message_container">
+                <div class="error_container">
+                    <i class="fas fa-exclamation-triangle fa-5x"></i>
+                </div>
+                <div class="error_message_content_container">
+                    <div class="error_message_header">
+                        <b><span>API Error!</span></b>
+                    </div>
+                    <hr>
+                    <div class="error_message_content">
+                        <span>Unable to contant the STF API!<br>Please tell Nathan!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="body_container">
-
+            <div class="container_tournament" onclick="show_tournament_options()">
+                <div class="container_inner">
+                    <div class="tournament_information">
+                        <span class="tournament_name">DEMO</span>
+                        <i class="fas fa-location-arrow"></i>
+                        <span class="tournament_location">Online</span>
+                        <span class="tournament_attendees"><i class="fas fa-user-friends"></i> 10</span>
+                    </div>
+                    <div class="tournament_view_option">
+                        <ul>
+                            <li>Participants</li>
+                            <li>Matches</li>
+                            <li>Results</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
+    <script>
+        document.getElementsByClassName("error_message")[0].style.opacity = 0;
+        document.getElementsByClassName("error_message")[0].style.display = "none";
+        document.getElementsByClassName("tournament_view_option")[0].style.display = "none";
+
+        function show_tournament_options() {
+            console.log("hit");
+        document.getElementsByClassName("tournament_view_option")[0].style.display = "block";
+        }
+    </script>
+    <script src="https://kit.fontawesome.com/1f239a6b7c.js" crossorigin="anonymous"></script>
 </html>

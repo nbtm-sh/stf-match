@@ -1,3 +1,113 @@
 body {
+    margin: 0px;
+    font-family: 'Lato', sans-serif;
+}
+
+.body_container {
+    width: 100%;
+    height: 100%;
+    background-color: #323639;
+    color: white;
+}
+
+.tournament_name {
+    width: 5%;
+    padding-right: 10px;
+    margin-right: 10px;
+    margin-left: 5px;
+    padding: 10px;
+    border-right: 1px solid #ccc;
+    background-color: #4485ec;
+}
+
+.container_inner {
+    box-shadow: 3px 3px 10px #000;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.container_inner .fas {
     
+}
+
+.tournament_attendees {
+    float: right;
+    margin-right: 10px;
+}
+
+.container_tournament {
+    padding: 10px;
+    cursor: pointer;
+    
+
+    transition: height 0.5s ease-out;
+}
+
+.error_message {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.error_message_container {
+    padding: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    width: 400px;
+    height: 150px;
+
+    background-color: #646c71;
+    box-shadow: 3px 3px 10px #000;
+    color: white;
+
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.error_container {
+    display: flex;
+    align-items: center;
+
+    height: 100%;
+    width: 30%;
+}
+
+.error_message_content_container {
+    display: flex;
+    flex-direction: column;
+
+    /*height: 30%;*/
+    width: 100%;
+    margin-left: 30px;
+}
+
+hr {
+    width: 100%;
+    color: #fff;
+    border-style: solid;
+}
+
+.error_message_header {
+    /*height: 40%;*/
+}
+
+.tournament_view_option {
+    width: 100%;
+}
+
+.tournament_view_option li {
+    display: inline;
+    list-style: none;
 }
