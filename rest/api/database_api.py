@@ -1,9 +1,9 @@
 import mysql.connector
-from player import Player
-from tournament import Tournament
-from match import Match
-from fight import Fight
-from ranking import Ranking
+from api.player import Player
+from api.tournament import Tournament
+from api.match import Match
+from api.fight import Fight
+from api.ranking import Ranking
 
 class STF:
     def __init__(self, username=None, password=None, host=None, database=None):
@@ -21,7 +21,7 @@ class STF:
 
         return cursor.fetchall()
     
-    def set_player_score(self, player_id, score, tournament=None):
+    def set_player_score(self, player_id, score, tournament=None): # Requires authenticated user
         query = f"UPDATE `playerScoresCache` SET `uScore`={round(score, 2)} WHERE `uPlayerId`={player_id}"
         if tournament != None:
             query += f" AND `tTournament`={tournament}"
