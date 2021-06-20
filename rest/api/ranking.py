@@ -13,47 +13,86 @@ class Ranking:
         pass
     
     def all_ranking(self, update_database=False):
-        tournaments = self.database.get_tournament()
-        players = []
-        player_scores = {}
-        player_tournament_count = {}
+        if self.data_modified == True:
+            tournaments = self.database.get_tournament()
+            players = []
+            player_scores = {}
+            player_tournament_count = {}
 
-        def index(lst, uname):
-            for i in range(len(lst)):
-                if lst[i].uName == uname:
-                    return i
+            def index(lst, uname):
+                for i in range(len(lst)):
+                    if lst[i].uName == uname:
+                        return i
+                
+                return -1
+
+            for tournament in tournaments:
+                tournament_results = self.get_tournament_ranking(tournament, ret=self.RETURN_OBJECT, count_dq=False)
+
+                for player in tournament_results:
+                    if player.uName not in player_tournament_count.keys():
+                        player_tournament_count[player.uName] = 0
+                        player_scores[player.uName] = 0
+                    player_tournament_count[player.uName] += 1
+                    player_scores[player.uName] += player.uScore
+
+                    if index(players, player.uName) == -1:
+                        players.append(player)
             
-            return -1
+            for i in list(player_scores.keys()):
+                if player_scores[i] != 0: # Do not consider players with no score
+                    player_scores[i] += 3
+                    player_scores[i] += 0
+                # Solve the issue where new players will jump to the top of the leaderboard
+                player_scores[i] /= (player_tournament_count[i] + 2)
+                players[index(players, i)].score = player_scores[i]
+            
+            if update_database:
+                self.update_cache(None, players)
+                self.data_modified = False
+            return players
+        else:
+            query = "SELECT * FROM `playerScoresCache` WHERE `tTournament`=NULL"
+    
+    def tournament_exists_in_chache(self, tournament_id):
+        # Check if the tournament results exist in the result cache
 
-        for tournament in tournaments:
-            tournament_results = self.get_tournament_ranking(tournament, ret=self.RETURN_OBJECT, count_dq=False)
+        query = f"SELECT * FROM `playerScoresCache` WHERE `tTournament`={tournament_id}"
+        result = self.database.execute_query(query)
 
-            for player in tournament_results:
-                if player.uName not in player_tournament_count.keys():
-                    player_tournament_count[player.uName] = 0
-                    player_scores[player.uName] = 0
-                player_tournament_count[player.uName] += 1
-                player_scores[player.uName] += player.uScore
+        return len(result) != 0
+    
+    def create_cache_index(self, tournament_id):
+        # Get tournament entrants
+        tournament = self.database.get_tournament(id=tournament_id)[0]
+        tournament_entrants = []
 
-                if index(players, player.uName) == -1:
-                    players.append(player)
+        for i in tournament.tMatches:
+            if i.uPlayer1.id not in tournament_entrants:
+                tournament_entrants.append(i.uPlayer1.id)
+            if i.uPlayer2.id not in tournament_entrants:
+                tournament_entrants.append(i.uPlayer2.id)
         
-        for i in list(player_scores.keys()):
-            if player_scores[i] != 0: # Do not consider players with no score
-                player_scores[i] += 3
-                player_scores[i] += 0
-            # Solve the issue where new players will jump to the top of the leaderboard
-            player_scores[i] /= (player_tournament_count[i] + 2)
-            players[index(players, i)].score = player_scores[i]
+        # Insert player list into database
         
-        return players
+        # Get last ID
+        query = f"SELECT * FROM `playerScoresCache` ORDER BY `id` DESC LIMIT 1;"
+        result = self.database.execute_query(query)[0]
+        last_id = int(result[0])
+
+        for i, c in zip(tournament_entrants, range(len(tournament_entrants))):
+            query = f"INSERT INTO `playerScoresCache` (id, uPlayerId, uScore, tTournament) VALUES ({last_id + 1 + c}, {i}, 0, {tournament_id});"
+            self.database.execute_query(query)
+            print(query)
+        
+        self.database.database_connection.commit()
 
     def update_cache(self, tournamet_id, results):
         # Update the cache database
         # This can later be revised to have cache stored server side, instead of on the database
         for i in results:
             t = tournamet_id if tournamet_id != None else "NULL"
-            query = f"UPDATE `playerScoresCache` SET `uScore`={i.uScore} WHERE `uPlayerId`={i.id} AND `tTournament`={t};"
+            query = f"UPDATE `playerScoresCache` SET `uScore`={round(i.uScore, 2)} WHERE `uPlayerId`={i.id} AND `tTournament`={t};"
             print(query)
             self.database.execute_query(query)
         
@@ -92,6 +131,8 @@ class Ranking:
                 players[i].bIgnore = players[i].uIgnore
             
             if update_database_on_data_change:
+                if not self.tournament_exists_in_chache(tournament_id):
+                    self.create_cache_index(tournament_id)
                 self.update_cache(tournament_id if type(tournament_id) != Tournament else tournament_id.id, players)
             return players
         else:

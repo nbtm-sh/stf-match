@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title> {{ app.title }} </title>
+  </head>
+  <style>
+    body {
+      font-family: Roboto;
+    }
+  </style>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app" width="100%">
+    <v-app>
+      <template>
+        <v-dialog
+        v-model="dialog"
+        width="500px"
+        >
+        <v-card>
+          <v-card-title class="headline grey lighten-2">
+            Enter tournament
+          </v-card-title>
+          <v-spacer></v-spacer>
+          <v-alert type="error" class="ma-10" v-model="error">
+            You must select at least one bracket.
+          </v-alert>
+          <v-card-text class="mt-4 mb-0">
+            Confirm your entry into this tournament.<br>You will be entering this tournament as...
+          </v-card-text>
+          <v-container class="pl-5">
+            <v-card class="pa-5" elevation=10>
+              <v-row justify=center align="center">
+              <v-col cols=2>
+                <v-avatar class="mt-auto mb-auto" height="70px" width="70px"><img src="nathan.jpg" /></v-avatar>
+              </v-col>
+              <v-col cols=50 class="ml-10 mb-0">
+                  <div class="h3"><b>Nathan</b> <i class="darken5">nbtm</i></div>
+                  <div class="p1 lighten-2">Australia</div>
+              </v-col>
+              <v-col cols=90>
+                <div class="float-right headline darken1">#26</div>
+              </v-col>
+              </v-row>
+            </v-card>
+            <v-list color="gray" flat>
+              <v-subheader>BRACKETS</v-subheader>
+              <v-list-item>
+                <v-list-item-icon class="ma-0 pa-0">
+                  <v-icon>mdi-google-controller</v-icon>
+                  <v-checkbox enabled class="ml-2" value='ps' v-model="selected"></v-checkbox>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>Playstation</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-icon class="ma-0 pa-0">
+                  <v-icon>mdi-keyboard</v-icon>
+                  <v-checkbox enabled class="ml-2" value='pc' v-model="selected"></v-checkbox>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>PC</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-container>
+          <v-card-actions color="white">
+            <v-btn text color="blue" onclick="app.snackbar = true; app.dialog = false;">Confirm</v-btn>
+            <v-btn text color="grey">Cancel</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      </template>
+      <template>
+        <v-snackbar
+          v-model="snackbar"
+          :vertical="vertical"
+        >
+          You have been entered into Sunset Showdown
+        </v-snackbar>
+        <v-card
+          color="grey lighten-4"
+          flat
+          height="100%"
+          tile
+        >
+          <v-toolbar>
+            <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      
+            <v-toolbar-title>Sonic the Fighters</v-toolbar-title>
+      
+            <v-spacer></v-spacer>
+      
+            <v-btn icon>
+              <v-icon>mdi-magnify</v-icon>
+            </v-btn>
+      
+            <v-btn icon>
+              <v-icon>mdi-account-circle</v-icon>
+            </v-btn>
+          </v-toolbar>
+          <v-container>
+            <v-row class="pa-5" align="center" justify="center">
+              <v-banner
+                width="70%"
+              >
+                <v-avatar
+                  slot="icon"
+                  color="deep-purple accent-4"
+                  size="40"
+                >
+                  <v-icon
+                    icon="mdi-update"
+                    color="white"
+                  >
+                    mdi-update
+                  </v-icon>
+              </v-avatar>
+              <v-toolbar-title>Upcoming Tournaments</v-toolbar-title>
+            </v-banner>
+            </v-row>
+            <v-row class="pa-5" align="center" justify="center">
+              <v-card
+                width="70%"
+              >
+                <v-system-bar color="pink" dark window>
+                  <v-toolbar-title>Sunset Showdown</v-toolbar-title>
+                  <v-spacer></v-spacer>
+                  <v-icon class="mr-2">mdi-calendar-today</v-icon>
+                  <v-text>25th-26th June</v-text>
+                </v-system-bar>
+                <v-img
+                  src="image-5239f48042b8e04042df8b1a53959236.png"
+                  height="200px"
+                >
+                </v-img>
+                <v-card-text color="black">It's time for a special announcement! Our next tournament, titled Sunset Showdown, is now open for registration! This tournament is unique because we're not just featuring a Playstation bracket; we're also including a PC bracket for the very first time! So pleace consider signing up for one or even both if you can!</v-card-text>
+                <v-list>
+                  <v-subheader>BRACKETS</v-subheader>
+                  <v-list-item>
+                    <v-list-item-icon>
+                      <v-icon>mdi-google-controller</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                      <v-list-item-title>Playstation</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                  <v-list-item>
+                    <v-list-item-icon>
+                      <v-icon>mdi-keyboard</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                      <v-list-item-title>PC</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-list>
+                <v-container>
+                  <v-card-actions>
+                    <v-btn text color="blue" onclick="app.dialog = true">Enter Tournament</v-btn>
+                    <v-btn text color="grey"><v-icon>mdi-account-circle</v-icon>12 Entrants</v-btn>
+                  </v-card-actions>
+                </v-container>
+              </v-card>
+            </v-row>
+          </v-container>
+        </v-card>
+      </template>
+    </v-app>
+    </div>
+    <!-- built files will be auto injected -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script>
+
+      var app = new Vue({
+        el: '#app',
+        vuetify: new Vuetify(),
+        data: {
+          title: "STF",
+          dialog: false,
+          snackbar: false,
+          error: false,
+          selected: []
+        }
+      })
+    </script>
+  </body>
+</html>

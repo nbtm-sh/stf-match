@@ -1,56 +1,47 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <title>STF Demo Site</title>
+        <title>STF</title>
     </head>
-    <link href="style/v2_body.css" rel="stylesheet" type="text/css"> 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <body>
-        <div class="error_message">
-            <div class="error_message_container">
-                <div class="error_container">
-                    <i class="fas fa-exclamation-triangle fa-5x"></i>
-                </div>
-                <div class="error_message_content_container">
-                    <div class="error_message_header">
-                        <b><span>API Error!</span></b>
-                    </div>
-                    <hr>
-                    <div class="error_message_content">
-                        <span>Unable to contant the STF API!<br>Please tell Nathan!</span>
-                    </div>
-                </div>
+        <div id="app-4">
+            <input type="text" v-model="username" v-bind:placeholder="placeholder">
+            <input type="password" v-model="password"><br>
+            <div v-for="msg in messages">
+                <p1>{{ msg.text }}</p1>
             </div>
-        </div>
-        <div class="body_container">
-            <div class="container_tournament" onclick="show_tournament_options()">
-                <div class="container_inner">
-                    <div class="tournament_information">
-                        <span class="tournament_name">DEMO</span>
-                        <i class="fas fa-location-arrow"></i>
-                        <span class="tournament_location">Online</span>
-                        <span class="tournament_attendees"><i class="fas fa-user-friends"></i> 10</span>
-                    </div>
-                    <div class="tournament_view_option">
-                        <ul>
-                            <li>Participants</li>
-                            <li>Matches</li>
-                            <li>Results</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <button onclick="app.messages[2].text=app.username; console.log(app.username)">Test</button>
+            <button onclick="app.messages.push({text: 'UwU' });">Test2</button>
+            <button onclick="app.messages = []">Clear list</button>
         </div>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
     <script>
-        document.getElementsByClassName("error_message")[0].style.opacity = 0;
-        document.getElementsByClassName("error_message")[0].style.display = "none";
-        document.getElementsByClassName("tournament_view_option")[0].style.display = "none";
-
-        function show_tournament_options() {
-            console.log("hit");
-        document.getElementsByClassName("tournament_view_option")[0].style.display = "block";
-        }
+        var app = new Vue({
+            el: "#app-4",
+            //vuetify: new Vuetify(),
+            data: {
+                username: "",
+                password: "",
+                placeholder: "Username or Password",
+                uxname: "",
+                messages: [
+                    { text: "Gaming" },
+                    { text: "Gaming part 2" },
+                    { text: this.username }
+                ]
+            },
+            methods: {
+                updateUsername: function() {
+                    this.username = this.uxname;
+                    this.uxname = "";
+                }
+            }
+        })
     </script>
-    <script src="https://kit.fontawesome.com/1f239a6b7c.js" crossorigin="anonymous"></script>
 </html>
