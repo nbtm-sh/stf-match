@@ -35,5 +35,5 @@ def matches():
     u2 = data['u1'] if 'u1' in data else None
 
     matches = db.get_match(players = [u1, u2])
-    
-app.run()
+
+app.run(host="0.0.0.0")
