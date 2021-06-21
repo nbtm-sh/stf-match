@@ -169,7 +169,7 @@
 
 
                     var host = "stf.nbti.net/api"
-                    var url = `http://${host}/matches?u1=${app.uPlayer1}`;
+                    var url = `https://${host}/matches?u1=${app.uPlayer1}`;
 
                     if (app.uPlayer2 != "") {
                         url += `&u2=${app.uPlayer2}`
@@ -203,9 +203,9 @@
       getPlayersRequest.onerror = function() {
       }
 
-      getPlayersRequest.open("GET", "http://stf.nbti.net/api/players");
+      getPlayersRequest.open("GET", "https://stf.nbti.net/api/players");
       getPlayersRequest.send();
-      console.log("Getting players from http://stf.nbti.net/api/players");
+      console.log("Getting players from https://stf.nbti.net/api/players");
 
       function getResults() {
           
