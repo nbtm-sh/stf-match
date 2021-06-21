@@ -133,11 +133,11 @@ class STF:
             appended_values += 1
         
         if tournament != None:
-            appended_values += 1
             if appended_values > 0:
                 query += " AND "
+            appended_values += 1
             query += f"`tTournament`={tournament}"
-        
+        print(query)
         if players != None and len(players) != 0:
             appended_values += 1
             if appended_values > 0:
