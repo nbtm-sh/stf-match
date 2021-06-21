@@ -36,7 +36,7 @@ class STF:
         return ranking
 
     def get_player(self, player_id=None, player_country=None, player_username=None, player_team=None):
-        query = "SELECT * FROM `players` WHERE "
+        query = "SELECT * FROM `players`"
         values = {
             "id": player_id,
             "uName": player_username,
@@ -52,6 +52,9 @@ class STF:
                 append_keys.append(k)
                 append_values.append(v)
         
+        if len(append_keys) > 0:
+            query += " WHERE "
+
         # Create query
 
         for i in range(len(append_keys)):
@@ -117,6 +120,12 @@ class STF:
     def get_match(self, players=None, fighters=None, tournament=None, id=None):
         query = "SELECT * FROM `matches` WHERE "
 
+        try:
+            players.remove(None)
+            players.remove(None)
+        except:
+            pass
+        
         appended_values = 0
 
         if id != None:
@@ -124,11 +133,13 @@ class STF:
             appended_values += 1
         
         if tournament != None:
+            appended_values += 1
             if appended_values > 0:
                 query += " AND "
             query += f"`tTournament`={tournament}"
         
-        if players != None:
+        if players != None and len(players) != 0:
+            appended_values += 1
             if appended_values > 0:
                 query += " AND "
             if len(players) == 1:
@@ -136,8 +147,9 @@ class STF:
             elif len(players) == 2:
                 query += f"((`uPlayer1`={players[0]} OR `uPlayer2`={players[0]}) AND (`uPlayer1`={players[1]} OR `uPlayer2`={players[1]}))"
         
-        if query == "SELECT * FROM `matches` WHERE ":
-            query.replace(" WHERE ", "")
+        if query.endswith(" WHERE "):
+            query = query.replace(" WHERE " , "")
+        print(query)
         query += ";"
 
         query_result = self.execute_query(query)
