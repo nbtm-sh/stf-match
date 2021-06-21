@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title> {{ app.title }} </title>
+  </head>
+  <style>
+    body {
+      font-family: Roboto;
+    }
+  </style>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app" width="100%">
+    <v-app>
+      <template>
+        <v-card
+          color="grey lighten-4"
+          flat
+          height="100%"
+          tile
+        >
+          <v-toolbar>
+            <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      
+            <v-toolbar-title>Sonic the Fighters - Match Search</v-toolbar-title>
+      
+            <v-spacer></v-spacer>
+      
+            <v-btn icon>
+              <v-icon>mdi-magnify</v-icon>
+            </v-btn>
+      
+            <v-btn icon>
+              <v-icon>mdi-account-circle</v-icon>
+            </v-btn>
+          </v-toolbar>
+          <v-container>
+            <v-row class="pa-5" align="center" justify="center">
+              <v-card
+                width=90%
+              >
+                <v-system-bar color="blue" dark window>
+                    <v-toolbar-title>Search options</v-toolbar-title>
+                </v-system-bar>
+                <v-container
+                    width="100%"
+                    align=center
+                >
+                    <v-alert
+                        dark
+                        type="error"
+                        width="100%"
+                        class="ma-0"
+                        v-model="playerError"
+                    >
+                    You must enter at least one player!
+                    </v-alert>
+                </v-container>
+                <v-container>
+                    <v-banner>Players</v-banner>
+                    <v-card-subtitle><i>At least one field is required to be filled</i></v-card-subtitle>
+                    <v-row class="">
+                        <v-col cols=6>
+                            <v-autocomplete
+                                label="Player 1"
+                                filled
+                                :items="players"
+                                item-text="uName"
+                                item-value="uName"
+                                v-model="uPlayer1"
+                            >
+                            </v-autocomplete>
+                        </v-col>
+                        <v-col cols=6>
+                            <v-autocomplete
+                                label="Player 2"
+                                filled
+                                :items="players"
+                                item-text="uName"
+                                item-value="uName"
+                                v-model="uPlayer2"
+                            >
+
+                            </v-autocomplete>
+                        </v-col>
+                    </v-row>
+                </v-container>
+                <v-card-actions>
+                    <v-btn text color="blue" @click="searchMatches"><v-icon>mdi-magnify</v-icon>Search</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-row>
+            <v-row align="center" justify="center" v-for="r in results">
+                <v-card
+                    width=90%
+                    class="mb-5 pa-5"
+                >
+                    <v-row>
+                        <v-col cols=5 v-bind:class="{ red : r.tWinner==r.uPlayer2, 'light-green' : r.tWinner!=r.uPlayer2 }" class="rounded-sm white--text">
+                            <span color="white" class="text-h7">{{ r.uPlayer1.uName }}</span>
+                        </v-col>
+                        <v-col cols=2 align="center" class="text-h7">
+                            <span><b>VS</b></span>
+                        </v-col>
+                        <v-col cols=5 right v-bind:class="{ red : r.tWinner!=r.uPlayer2, 'light-green' : r.tWinner==r.uPlayer2 }" class="rounded-sm white--text">
+                            <span class="float-right text-h7">{{ r.uPlayer2.uName }}</span>
+                        </v-col>
+                    </v-row>
+                    <v-row v-for="m in r.tRounds">
+                        <v-col cols=5 class="rounded-sm">
+                            <span color="white" class="text-h7">{{ m.uPlayer1Fighter == null ? "N/A" : m.uPlayer1Fighter }}</span>
+                        </v-col>
+                        <v-col cols=2 align="center" class="text-h7">
+                            <v-icon>{{ m.tWinner == r.uPlayer1.id ? "mdi-arrow-left" : "mdi-arrow-right" }}</v-icon>
+                        </v-col>
+                        <v-col cols=5 class="rounded-sm black--text">
+                            <span color="white" class="text-h7 float-right">{{ m.uPlayer1Fighter == null ? "N/A" : m.uPlayer1Fighter }}</span>
+                        </v-col>
+                    </v-row>
+                </v-card>
+            </v-row>
+            <v-row class="pa-5" align="center" justify="center">
+                <v-skeleton-loader
+                    v-if="skelloader"
+                    class="mx-auto"
+                    width=90%
+                    type="card"
+              ></v-skeleton-loader>
+            </v-row>
+          </v-container>
+        </v-card>
+      </template>
+    </v-app>
+    </div>
+    <!-- built files will be auto injected -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script>
+      var app = new Vue({
+        el: '#app',
+        vuetify: new Vuetify(),
+        data: {
+          title: "STF",
+          skelloader: false,
+          uPlayer1: "",
+          uPlayer2: "",
+          playerError: false,
+          players: [],
+          results: []
+        },
+        methods: {
+            searchMatches: function() {
+                if (app.uPlayer1 == "") {
+                    app.playerError = true;
+                } else {
+                    app.skelloader = true;
+                    app.playerError = false;
+                    app.results = [];
+
+
+                    var host = "stf.nbti.net/api"
+                    var url = `http://${host}/matches?u1=${app.uPlayer1}`;
+
+                    if (app.uPlayer2 != "") {
+                        url += `&u2=${app.uPlayer2}`
+                    }
+
+                    var getMatchesRequest = new XMLHttpRequest();
+                    getMatchesRequest.onload = function (ctx=getMatchesRequest) {
+                        console.log(getMatchesRequest.response)
+                        var response = JSON.parse(getMatchesRequest.response);
+                        // Group by tournament
+                        app.results = response.matches;
+                        app.skelloader = false;
+                    }
+
+                    getMatchesRequest.open("GET", url);
+                    getMatchesRequest.send();
+                }
+            }
+        }
+      });
+
+      var getPlayersRequest = new XMLHttpRequest();
+      getPlayersRequest.onload = function(p=app) {
+          console.log(getPlayersRequest.status)
+          console.log(getPlayersRequest.response);
+          
+          var response = JSON.parse(getPlayersRequest.response);
+          app.players = response.players;
+      }
+
+      getPlayersRequest.onerror = function() {
+      }
+
+      getPlayersRequest.open("GET", "http://stf.nbti.net/api/players");
+      getPlayersRequest.send();
+      console.log("Getting players from http://stf.nbti.net/api/players");
+
+      function getResults() {
+          
+      }
+    </script>
+  </body>
+</html>
