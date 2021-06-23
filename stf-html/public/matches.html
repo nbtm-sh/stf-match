@@ -97,7 +97,17 @@
                 </v-container>
                 <v-card-actions>
                     <v-btn text color="blue" @click="searchMatches"><v-icon>mdi-magnify</v-icon>Search</v-btn>
+                    <v-btn text color="grey" @click="uPlayer2 = ''; uPlayer1 = '';">Clear</v-btn>
                 </v-card-actions>
+              </v-card>
+            </v-row>
+            <v-row align="center" justify="center">
+              <v-card
+                width=90%
+                v-if="skelloader == false && results.length == 0 && query"
+              >
+                <v-card-title>No results</v-card-title>
+                <v-card-subtitle>No results were found for your query. Please try something else.</v-card-subtitle>
               </v-card>
             </v-row>
             <v-row align="center" justify="center" v-for="r in results">
@@ -124,7 +134,7 @@
                             <v-icon>{{ m.tWinner == r.uPlayer1.id ? "mdi-arrow-left" : "mdi-arrow-right" }}</v-icon>
                         </v-col>
                         <v-col cols=5 class="rounded-sm black--text">
-                            <span color="white" class="text-h7 float-right">{{ m.uPlayer1Fighter == null ? "N/A" : m.uPlayer1Fighter }}</span>
+                            <span color="white" class="text-h7 float-right">{{ m.uPlayer2Fighter == null ? "N/A" : m.uPlayer2Fighter }}</span>
                         </v-col>
                     </v-row>
                 </v-card>
@@ -146,6 +156,8 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script>
+      const host = "http://127.0.0.1:5000/"
+
       var app = new Vue({
         el: '#app',
         vuetify: new Vuetify(),
@@ -156,6 +168,7 @@
           uPlayer2: "",
           playerError: false,
           players: [],
+          query: false,
           results: []
         },
         methods: {
@@ -165,11 +178,10 @@
                 } else {
                     app.skelloader = true;
                     app.playerError = false;
+                    app.query = true;
                     app.results = [];
 
-
-                    var host = "stf.nbti.net/api"
-                    var url = `https://${host}/matches?u1=${app.uPlayer1}`;
+                    var url = `${host}matches?u1=${app.uPlayer1}`;
 
                     if (app.uPlayer2 != "") {
                         url += `&u2=${app.uPlayer2}`
@@ -203,9 +215,9 @@
       getPlayersRequest.onerror = function() {
       }
 
-      getPlayersRequest.open("GET", "https://stf.nbti.net/api/players");
+      getPlayersRequest.open("GET", `${host}players`);
       getPlayersRequest.send();
-      console.log("Getting players from https://stf.nbti.net/api/players");
+      console.log(`${host}players`);
 
       function getResults() {
           

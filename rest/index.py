@@ -52,6 +52,24 @@ def matches():
         resp.headers['Access-Control-Allow-Origin'] = '*'
         return resp
     matches = [i.json() for i in matches]
+
+    tournament_cache = {}
+
+    for i in range(len(matches)):
+        if matches[i]["tTournament"] in tournament_cache:
+            pass
+        else:
+            tournament_cache[matches[i]["tTournament"]] = db.get_tournament(id=matches[i]["tTournament"])[0]
+            continue
+        
+    print(tournament_cache)
+
+    for i in range(len(matches)):
+        matches[i]["tTournament"] = {
+            "id": matches[i]["tTournament"],
+            "tName": tournament_cache[matches[i]["tTournament"]].tName
+        }
+
     js = {"matches": matches}
     resp = jsonify(js)
     resp.headers['Access-Control-Allow-Origin'] = '*'
