@@ -1,9 +1,9 @@
 import mysql.connector
-from api.player import Player
-from api.tournament import Tournament
-from api.match import Match
-from api.fight import Fight
-from api.ranking import Ranking
+from player import Player
+from tournament import Tournament
+from match import Match
+from fight import Fight
+from ranking import Ranking
 
 class STF:
     def __init__(self, username=None, password=None, host=None, database=None):

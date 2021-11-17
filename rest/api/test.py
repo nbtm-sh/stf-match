@@ -1,10 +1,11 @@
 import database_api
 import ranking
 import time
+import os
 
 database = database_api.STF(
-    username="demoauth",
-    password="ZhJ3bGjgfoyL9chU284fRGSqPN9dXnypi2MFPLMokXkNKE2JGH",
+    username=os.environ["STF_USERNAME"],
+    password=os.environ["STF_PASSWORD"],
     host="stf.nbti.net",
     database="stf"
 )
@@ -15,6 +16,8 @@ database = database_api.STF(
 ranker = ranking.Ranking(database=database)
 t = database.get_tournament(id=1)[0]
 
+v = ranker.all_ranking(update_database=True)
+print("2nd call")
 v = ranker.all_ranking()
 print("Rank\tScore\tUsername")
 v.sort(key=lambda x: x.uScore, reverse=True)

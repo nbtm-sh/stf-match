@@ -1,0 +1,58 @@
+.player-card {
+    display: flex;
+    flex-direction: row;
+
+    width: 300px;
+    height: 100px;
+
+    border: 1px solid #629aca;
+    border-radius: 5px;
+    padding: 5px;
+
+    background-color: #1c2d3c;
+    font-family: 'Roboto', sans-serif;;
+}
+.avatar-container {
+    width: 40%;
+    padding: 5px;
+    position: relative;
+}
+
+.avatar-container #avatar {
+    height: 100%;
+}
+
+.avatar-container #country {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+
+    width: 20%;
+}
+.userdata-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: 100%;
+    color: white;
+}
+.userdata-container .username-container {
+    font-size: 30px;
+    width: 100%;
+}
+.userdata-container .rank-container {
+    width: 100%;
+    font-size: 30px;
+    padding-right: 10px;
+    color: #2d455a;
+}
+.userdata-container .rank-container span {
+    float: right;
+}
+.userdata-container #country-text {
+    font-size: 15px;
+}
+.avatar-container img {
+    border-radius: 5px;
+}

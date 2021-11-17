@@ -1,0 +1,103 @@
+<html>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet"> 
+    <style>
+        .result-container {
+            width: 50%;
+        }
+
+        .t-name {
+            font-size: 25px;
+        }
+
+        .t-result hr {
+            color: #4990ce;
+            width: 100%;
+        }
+
+        .t-result {
+            display: flex;
+            flex-direction: column;
+
+            width: 100%;
+            font-family: 'Roboto';
+
+            background-color: #224a6d;
+            padding: 5px;
+            border: 1px solid #4990ce;
+            color: #fff;
+        }
+
+        .bracket {
+            background-color: #2a3e4e;
+            padding: 5px;
+
+        }
+
+        .bracket-players {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+        }
+
+        .bracket-player { 
+            width: 50%;
+            padding: 10px;
+            padding: 10px;
+
+            margin-left: 5px;
+            margin-right: 5px;
+
+            display: flex;
+            flex-direction: column;
+
+            border: 1px solid #4990ce;
+        }
+
+        .winner {
+            background-color: #90e27c;
+        }
+
+        .looser {
+            background-color: #e27d7c;
+        }
+
+        .bracket-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        #p1 {
+            float: right;
+        }
+
+        .player {
+            font-size: 18px;
+        }
+
+        .right {
+            float: right;
+        }
+    </style>
+    <body>
+        <div class="result-container">
+            <div class="t-result">
+                <span class="t-name">Test Tournament</span>
+                <hr>
+                <div class="t-matches">
+                    <div class="bracket">
+                        <span class="bracket-title">Winners Round 1</span>
+                        <div class="bracket-players">
+                            <div class="bracket-player winner">
+                                <span id="p1" class="right player">Koozbane</span><br>
+                                <span class="fighter right">Tails</span>
+                            </div>
+                            <div class="bracket-player looser"><span id="p2" class="player">Polymath</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

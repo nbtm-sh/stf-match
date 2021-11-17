@@ -1,4 +1,4 @@
-from api.tournament import Tournament
+from tournament import Tournament
 
 class Ranking:
     def __init__(self, database=None):
@@ -53,6 +53,8 @@ class Ranking:
             return players
         else:
             query = "SELECT * FROM `playerScoresCache` WHERE `tTournament`=NULL"
+
+            results = self.database.execute_query(query)
     
     def tournament_exists_in_chache(self, tournament_id):
         # Check if the tournament results exist in the result cache
@@ -92,7 +94,7 @@ class Ranking:
         # This can later be revised to have cache stored server side, instead of on the database
         for i in results:
             t = tournamet_id if tournamet_id != None else "NULL"
-            query = f"UPDATE `playerScoresCache` SET `uScore`={round(i.uScore, 2)} WHERE `uPlayerId`={i.id} AND `tTournament`={t};"
+            query = f"UPDATE `playerScoresCache` SET `uScore`={round(i.uScore, 2)} WHERE `uPlayerId`={i.id} AND `tTournament` IS {t};"
             print(query)
             self.database.execute_query(query)
         

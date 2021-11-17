@@ -1,43 +1,29 @@
 <html>
     <head>
-        <title>STF Matchmaking</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     </head>
-    <link href="style/body.css" rel="stylesheet" type="text/css">
+
     <body>
-        <div class="header">
-            <img src="img/header.jpg" id="headerimg">
+        <div id="app">
+            <v-app>
+                <v-main>
+                    <v-app-bar
+                        absolute
+                    >
+                        <v-toolbar-title>Sonic the Fighters</v-toolbar-title>
+                    </v-app-bar>
+                    <v-navigation-drawer permenant>
+                        
+                    </v-navigation-drawer>
+                </v-main>
+            </v-app>
         </div>
-        <h1>STF Matchmaking Demo Site</h1>
-        <p>I made this in like an hour okay it'll be better later</p>
-        <p>Also, this is a live testing server. Stuff is gonna stop working randomly. This site is not an example of the final product</p>
-        <a href="v2_index.html">V2 Site</a><br>
-        <div class="matchmakingform">
-            <form action="/index.html" method=GET>
-                <h3>Search matchmaking results</h3>
-                <input name="u1" type="text" placeholder="Player 1"><br>
-                <input name="u2" type="text" placeholder="Player 2"><br>
-                <input type="submit" value="Search">
-            </form>
-        </div>
-        <div class="results">
-            <table id="resulttable">
-                <tr>
-                    <th>Player 1</th>
-                    <th>Fighter</th>
-                    <th>Round</th>
-                    <th>Winner</th>
-                    <th>Fighter</th>
-                    <th>Player 2</th>
-                </tr>
-                <tr>
-                    <td>Loading...</td>
-                </tr>
-            </table>
-        </div>
-        <script src="js/webRequest.js"></script>
-        <script src="js/api.js"></script>
-        <script>
-        </script>
-        <p>Website by <a href="https://github.com/nbtm-sh">nbtm!</a>, website design by <a href="https://twitter.com/B3xHotShot">ShadowJackal</a>.</p>
     </body>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="assets/js/index.js"></script>
 </html>
